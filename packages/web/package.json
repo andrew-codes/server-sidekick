@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "@rdhariwal/fpm-web",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Byte Smashers",
+  "contributors": [
+    "Andrew Smith <andrew.codes>"
+  ],
+  "main": "src/index.js",
+  "webpack/entry": "src/index.js",
+  "webpack/output": "dist/index.js",
+  "scripts": {
+    "prepublish": "{ cd ../../; yarn run prepublish/single @rdhariwal/fpm-web; };",
+    "test": "{ cd ../../; yarn run test/single @rdhariwal/fpm-web; };"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "react": "16.0.0-alpha.6"
+  }
+}

@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "repository": "git@github.com:andrew-codes/reference-app.git",
   "author": "Byte Smashers",
-  "contributors":[
+  "contributors": [
     "Andrew Smith <andrew.codes>"
   ],
   "license": "MIT",
@@ -27,6 +27,7 @@
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "chalk-cli": "^3.0.0",
     "concurrently": "^3.4.0",
     "cross-env": "^5.0.1",
