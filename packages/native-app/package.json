@@ -1,17 +1,19 @@
 {
-  "private": true,
   "name": "@andrew-codes/reference-app-native",
   "version": "0.0.1",
-  "repository": "git@github.com:andrew-codes/reference-app.git",
-  "description": "",
-  "author": "Andrew Smith <andrew@andrew.codes>",
-  "license": "ISC",
+  "private": true,
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
     "prepublish": "{ cd ../../; yarn run prepublish/single @andrew-codes/reference-app-native; };",
     "test": "{ cd ../../; yarn run test/single @andrew-codes/reference-app-native; };"
   },
   "dependencies": {
-    "react": "16.0.0-alpha.12",
-    "react-native": "^0.45.1"
+    "expo": "^17.0.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "^0.44.0"
   }
 }
