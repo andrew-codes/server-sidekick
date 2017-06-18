@@ -1,0 +1,12 @@
+{
+  "name": "@andrew-codes/reference-app-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "env.js",
+  "scripts": {
+    "prepublish": "{ cd ../../; yarn run prepublish/single @andrew-codes/reference-app-server; };",
+    "test": "{ cd ../../; yarn run test/single @andrew-codes/reference-app-server; };"
+  },
+  "author": "Andrew Smith <andrew@andrew.codes>",
+  "license": "ISC"
+}

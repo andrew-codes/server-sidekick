@@ -1,0 +1,15 @@
+{
+  "name": "@andrew-codes/reference-app-native",
+  "version": "0.0.1",
+  "description": "",
+  "author": "Andrew Smith <andrew@andrew.codes>",
+  "license": "ISC",
+  "scripts":{
+    "prepublish": "{ cd ../../; yarn run prepublish/single @andrew-codes/reference-app-native; };",
+    "test": "{ cd ../../; yarn run test/single @andrew-codes/reference-app-native; };"
+  },
+  "dependencies": {
+    "react": "16.0.0-alpha.12",
+    "react-native": "^0.45.1"
+  }
+}
