@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@andrew-codes/reference-app",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "repository": "git@github.com:andrew-codes/reference-app.git",
   "author": "Andrew Smith <andrew@andrew.codes>",
   "license": "MIT",

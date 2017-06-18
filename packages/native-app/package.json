@@ -1,10 +1,12 @@
 {
+  "private": true,
   "name": "@andrew-codes/reference-app-native",
   "version": "0.0.1",
+  "repository": "git@github.com:andrew-codes/reference-app.git",
   "description": "",
   "author": "Andrew Smith <andrew@andrew.codes>",
   "license": "ISC",
-  "scripts":{
+  "scripts": {
     "prepublish": "{ cd ../../; yarn run prepublish/single @andrew-codes/reference-app-native; };",
     "test": "{ cd ../../; yarn run test/single @andrew-codes/reference-app-native; };"
   },
