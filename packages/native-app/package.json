@@ -1,15 +1,19 @@
 {
-  "name": "@andrew-codes/reference-app-native",
+  "name": "@rdhariwal/fpm-native",
   "version": "0.0.1",
   "private": true,
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "author": "Byte Smashers",
+  "contributors":[
+    "Andrew Smith <andrew.codes>"
+  ],
   "scripts": {
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "prepublish": "",
-    "test": "{ cd ../../; yarn run test/single @andrew-codes/reference-app-native; };"
+    "test": "{ cd ../../; yarn run test/single @rdhariwal/fpm-native; };"
   },
   "dependencies": {
     "expo": "^17.0.0",

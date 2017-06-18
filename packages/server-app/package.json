@@ -1,16 +1,19 @@
 {
   "private": true,
-  "name": "@andrew-codes/reference-app-server",
+  "name": "@rdhariwal/fpm-server",
   "version": "0.0.1",
   "repository": "git@github.com:andrew-codes/reference-app.git",
   "description": "",
+  "author": "Byte Smashers",
+  "contributors": [
+    "Andrew Smith <andrew.codes>"
+  ],
   "webpack/entry": "src/webServer/index.js",
   "webpack/output": "dist/index.js",
   "scripts": {
-    "prepublish": "{ cd ../../; yarn run prepublish/single @andrew-codes/reference-app-server; };",
-    "test": "{ cd ../../; yarn run test/single @andrew-codes/reference-app-server; };"
+    "prepublish": "{ cd ../../; yarn run prepublish/single @rdhariwal/fpm-server; };",
+    "test": "{ cd ../../; yarn run test/single @rdhariwal/fpm-server; };"
   },
-  "author": "Andrew Smith <andrew@andrew.codes>",
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3"

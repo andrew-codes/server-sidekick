@@ -3,6 +3,6 @@
 set -e
 
 BASEDIR=$(dirname $0)
-PKG="@andrew-codes/reference-app-server"
+PKG="@rdhariwal/fpm-native"
 
 $BASEDIR/_execute-scope-command.sh "$PKG" "../../build/bin/start-web.execute.sh $@"

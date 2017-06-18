@@ -1,9 +1,12 @@
 {
   "private": true,
-  "name": "@andrew-codes/reference-app",
+  "name": "@rdhariwal/fpm",
   "version": "0.0.1",
   "repository": "git@github.com:andrew-codes/reference-app.git",
-  "author": "Andrew Smith <andrew@andrew.codes>",
+  "author": "Byte Smashers",
+  "contributors":[
+    "Andrew Smith <andrew.codes>"
+  ],
   "license": "MIT",
   "scripts": {
     "bootstrap": "build/bin/bootstrap.sh",
