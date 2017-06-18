@@ -4,10 +4,15 @@
   "version": "0.0.1",
   "repository": "git@github.com:andrew-codes/reference-app.git",
   "description": "",
+  "webpack/entry": "src/webServer/index.js",
+  "webpack/output": "dist/index.js",
   "scripts": {
     "prepublish": "{ cd ../../; yarn run prepublish/single @andrew-codes/reference-app-server; };",
     "test": "{ cd ../../; yarn run test/single @andrew-codes/reference-app-server; };"
   },
   "author": "Andrew Smith <andrew@andrew.codes>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
 }

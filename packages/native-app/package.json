@@ -8,7 +8,7 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "prepublish": "{ cd ../../; yarn run prepublish/single @andrew-codes/reference-app-native; };",
+    "prepublish": "",
     "test": "{ cd ../../; yarn run test/single @andrew-codes/reference-app-native; };"
   },
   "dependencies": {
