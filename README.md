@@ -6,7 +6,6 @@ This is a sample application to aid in bootstrapping other projects, as well as 
 - yarn
 
 # Getting Started
-## Installing Dependencies
 
 ```bash
 yarn
@@ -26,4 +25,5 @@ yarn run bootstrap
 - `yarn test` - runs all tests
 - `yarn run test/single @pkgname` - will run only tests for provided package
 - `yarn lint` - lints all JS files
+
 
