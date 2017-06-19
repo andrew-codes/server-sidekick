@@ -1,9 +1,11 @@
 {
-  "name": "@rdhariwal/fpm-native",
+  "name": "v1-mobile",
   "version": "0.0.1",
   "private": true,
+  "repository": "git@github.com:andrew-codes/hack-week-august-2017.git",
+  "license": "MIT",
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
-  "author": "Byte Smashers",
+  "author": "VersionOne",
   "contributors":[
     "Andrew Smith <andrew.codes>"
   ],
@@ -13,7 +15,7 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "prepublish": "",
-    "test": "{ cd ../../; yarn run test/single @rdhariwal/fpm-native; };"
+    "test": "{ cd ../../; npm run test/single v1-mobile; };"
   },
   "dependencies": {
     "expo": "^17.0.0",

@@ -1,9 +1,10 @@
 {
   "private": true,
-  "name": "@rdhariwal/fpm-web",
+  "name": "v1-status-web-ui",
   "version": "0.0.1",
   "description": "",
-  "author": "Byte Smashers",
+  "repository": "git@github.com:andrew-codes/hack-week-august-2017.git",
+  "author": "VersionOne",
   "contributors": [
     "Andrew Smith <andrew.codes>"
   ],
@@ -11,10 +12,10 @@
   "webpack/entry": "src/index.js",
   "webpack/output": "dist/index.js",
   "scripts": {
-    "prepublish": "{ cd ../../; yarn run prepublish/single @rdhariwal/fpm-web; };",
-    "test": "{ cd ../../; yarn run test/single @rdhariwal/fpm-web; };"
+    "prepublish": "{ cd ../../; npm run prepublish/single v1-status-web-ui; };",
+    "test": "{ cd ../../; npm run test/single v1-status-web-ui; };"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "react": "16.0.0-alpha.6"
   }

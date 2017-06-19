@@ -38,6 +38,7 @@ const webpackConfig = {
             },
         ],
     },
+    plugins: [],
 };
 
 module.exports = webpackConfig;

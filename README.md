@@ -3,27 +3,27 @@ This is a sample application to aid in bootstrapping other projects, as well as 
 # Prerequisites
 
 - nodejs@^6
-- yarn
+- npm@^5
 
 # Getting Started
 
 ```bash
-yarn
-yarn run bootstrap
+npm install
+npm run bootstrap
 ```
 
 ## Running Native App
 
-- `yarn run native`
-- `yarn run native/ios`
-- `yarn run native/android`
-- `yarn run native/eject`
+- `npm run native`
+- `npm run native/ios`
+- `npm run native/android`
+- `npm run native/eject`
 
 ## Validating/Testing
 
-- `yarn validate` - will run all tests and lint all JS files
-- `yarn test` - runs all tests
-- `yarn run test/single @pkgname` - will run only tests for provided package
-- `yarn lint` - lints all JS files
+- `npm validate` - will run all tests and lint all JS files
+- `npm test` - runs all tests
+- `npm run test/single @pkgname` - will run only tests for provided package
+- `npm lint` - lints all JS files
 
 

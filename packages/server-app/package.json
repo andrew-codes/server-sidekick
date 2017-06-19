@@ -1,22 +1,24 @@
 {
   "private": true,
-  "name": "@rdhariwal/fpm-server",
+  "name": "v1-status-web-server",
   "version": "0.0.1",
-  "repository": "git@github.com:andrew-codes/reference-app.git",
   "description": "",
-  "author": "Byte Smashers",
+  "repository": "git@github.com:andrew-codes/hack-week-august-2017.git",
+  "author": "VersionOne",
   "contributors": [
     "Andrew Smith <andrew.codes>"
   ],
+  "webpack/web/entry": "src/client/index.js",
+  "webpack/web/output": "dist/client/index.js",
   "webpack/entry": "src/webServer/index.js",
   "webpack/output": "dist/index.js",
   "scripts": {
-    "prepublish": "{ cd ../../; yarn run prepublish/single @rdhariwal/fpm-server; };",
-    "test": "{ cd ../../; yarn run test/single @rdhariwal/fpm-server; };"
+    "prepublish": "{ cd ../../; npm run prepublish/single v1-status-web-server; npm run prepublish/single v1-status-web-server production.web; };",
+    "test": "{ cd ../../; npm run test/single v1-status-web-server; };"
   },
   "license": "ISC",
   "dependencies": {
-    "@rdhariwal/fpm-web": "^0.0.1",
+    "v1-status-web-ui": "^0.0.1",
     "express": "^4.15.3",
     "react": "^16.0.0-alpha.6",
     "react-dom": "^16.0.0-alpha.6"

@@ -2,6 +2,6 @@
 set -e
 
 BASEDIR=$(dirname $0)
-PKG="@rdhariwal/fpm-server"
+PKG="v1-status-server"
 
 $BASEDIR/_execute-scope-command.sh "$PKG" "../../build/bin/start-web.execute.sh $@"

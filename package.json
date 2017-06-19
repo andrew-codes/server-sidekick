@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "@rdhariwal/fpm",
+  "name": "hack-week-august-2017",
   "version": "0.0.1",
-  "repository": "git@github.com:andrew-codes/reference-app.git",
-  "author": "Byte Smashers",
+  "repository": "git@github.com:andrew-codes/hack-week-august-2017.git",
+  "author": "VersionOne",
   "contributors": [
     "Andrew Smith <andrew.codes>"
   ],
@@ -43,7 +43,10 @@
     "json-loader": "^0.5.4",
     "lerna": "^2.0.0-rc.5",
     "nodemon": "^1.11.0",
+    "react-hot-loader": "next",
     "url-loader": "^0.5.9",
-    "webpack": "^2.6.1"
+    "webpack": "^2.6.1",
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }

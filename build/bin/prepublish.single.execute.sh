@@ -5,5 +5,11 @@ pushd ../.. > /dev/null
 export PATH="`yarn bin`:$PATH"
 popd > /dev/null
 
+config="$1"
+if [[ $# -eq 0 || "$1" == "" ]]
+  then
+    config="production"
+fi
+
 chalk --no-stdin -t "{blue Generating CommonJS bundle...}"
-webpack --config ../../build/webpack/production.js $@
+webpack --config ../../build/webpack/$config.js $@
