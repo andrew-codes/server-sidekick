@@ -7,7 +7,7 @@ cache:
 notifications:
   email: false
 mono: none
-dotnet: 1.1.0
+dotnet: 2.0.0-preview2-006497
 before_install:
   - nvm install "$(jq -r '.engines.node' package.json)"
   - nvm use "$(jq -r '.engines.node' package.json)"
