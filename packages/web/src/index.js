@@ -1,3 +1,3 @@
-import HelloWorldComponent from './components/HelloWorld';
+import AppComponent from './components/App';
 
-export const HelloWorld = HelloWorldComponent;
+export const App = AppComponent;

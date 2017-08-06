@@ -5,3 +5,4 @@ npm-debug.log
 lerna-debug.log
 .expo
 dist/
+packages/server-app/main

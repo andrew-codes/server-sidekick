@@ -1,20 +1,23 @@
 import React from 'react';
 import {AppContainer} from 'react-hot-loader';
+import {BrowserRouter} from 'react-router-dom';
 import {render} from 'react-dom';
-import {HelloWorld} from 'v1-status-web-ui';
+import {App} from 'v1-status-web-ui';
 
-render((
-    <AppContainer>
-        <HelloWorld />
-    </AppContainer>
-), document.getElementById('root'));
+const renderApp = () => {
+    render((
+        <AppContainer>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </AppContainer>
+    ), document.getElementById('root'));
+};
+
+renderApp();
 
 if (module.hot) {
     module.hot.accept(() => {
-        render((
-            <AppContainer>
-                <HelloWorld />
-            </AppContainer>
-        ), document.getElementById('root'));
+        renderApp();
     });
 }
