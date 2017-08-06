@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-export PATH="`yarn bin`:$PATH"
+export PATH="`npm bin`:$PATH"
 
-lerna exec -- yarn test
+lerna exec -- npm test

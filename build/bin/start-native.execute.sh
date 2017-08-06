@@ -2,7 +2,7 @@
 set -e
 
 pushd ../.. > /dev/null
-export PATH="`yarn bin`:$PATH"
+export PATH="`npm bin`:$PATH"
 popd > /dev/null
 
 chalk --no-stdin -t "{blue Native App}"

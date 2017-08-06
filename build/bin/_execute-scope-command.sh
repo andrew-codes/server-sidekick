@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-export PATH="`yarn bin`:$PATH"
+export PATH="`npm bin`:$PATH"
 
 if [[ $# -eq 0 || "$1" == "" ]]; then
     chalk --no-stdin -t "{red No scope provided.}"

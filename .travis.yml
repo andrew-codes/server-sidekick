@@ -1,6 +1,5 @@
 language: node_js
 cache:
-  yarn: true
   directories:
     - node_modules
     - packages/**/node_modules
@@ -8,6 +7,9 @@ notifications:
   email: false
 node_js:
   - '6'
+before_install:
+  - npm install -g "npm@$(jq -r '.engines.npm' package.json)"
+  - npm -v
 install:
   - npm run bootstrap
 script:
