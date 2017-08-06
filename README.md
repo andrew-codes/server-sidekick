@@ -15,6 +15,8 @@ npm run bootstrap
 ```
 
 ## Running API Server
+Ensure you [setup your env](packages/api/README.md) first.
+
 - `npm run api/run`
 
 ## Running Web App
