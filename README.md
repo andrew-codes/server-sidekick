@@ -12,6 +12,10 @@ npm install
 npm run bootstrap
 ```
 
+## Running Web App
+
+- `npm run web`
+
 ## Running Native App
 
 - `npm run native`
