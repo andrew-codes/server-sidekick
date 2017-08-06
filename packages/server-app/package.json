@@ -22,8 +22,16 @@
     "express-unless": "^0.3.1",
     "react": "^16.0.0-alpha.6",
     "react-dom": "^16.0.0-alpha.6",
+    "react-redux": "^5.0.5",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.15.6",
+    "v1-status-state-modules": "^0.0.1",
     "v1-status-web-ui": "^0.0.1"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.2",
+    "redux-logger": "^3.0.6"
   }
 }

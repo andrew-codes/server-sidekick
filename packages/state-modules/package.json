@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "v1-status-state-modules",
+  "version": "0.0.1",
+  "description": "",
+  "repository": "git@github.com:andrew-codes/hack-week-august-2017.git",
+  "author": "VersionOne",
+  "contributors": [
+    "Andrew Smith <andrew.codes>"
+  ],
+  "main": "src/index.js",
+  "webpack/entry": "src/index.js",
+  "webpack/output": "dist/index.js",
+  "scripts": {
+    "prepublish": "{ cd ../../; npm run prepublish/single v1-status-state-modules; };",
+    "test": "{ cd ../../; npm run test/single v1-status-state-modules; };"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.15.6"
+  }
+}

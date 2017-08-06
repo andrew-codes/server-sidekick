@@ -8,11 +8,9 @@ export default (html, initialState = {}) =>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1" />
   </head>
   <body>
-  <div id="root">
-    ${html}
-  </div>
+  <div id="root">${html}</div>
   <script>
-    window.__PRELOADED_STATE__ = ${JSON.stringify(initialState).replace(/</g, '\\u003c')}
+    window.__PRELOADED_STATE__=${JSON.stringify(initialState).replace(/</g, '\\u003c')}
   </script>
   <script src="/dist/client/index.js"></script>
   </body>
