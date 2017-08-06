@@ -1,16 +1,19 @@
-language: node_js
+dist: trusty
+language: csharp
 cache:
   directories:
     - node_modules
     - packages/**/node_modules
 notifications:
   email: false
-node_js:
-  - '6'
+mono: none
+dotnet: 1.1.0
 before_install:
+  - nvm install "$(jq -r '.engines.node' package.json)"
+  - nvm use "$(jq -r '.engines.node' package.json)"
   - npm install -g "npm@$(jq -r '.engines.npm' package.json)"
-  - npm -v
 install:
+  - npm install
   - npm run bootstrap
 script:
   - npm run validate
