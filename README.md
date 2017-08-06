@@ -1,3 +1,5 @@
+![build status](https://travis-ci.org/andrew-codes/hack-week-august-2017.svg?branch=master)
+
 This is a sample application to aid in bootstrapping other projects, as well as keeping current with technology trends and best practices.  This bootstrap reference app contains a SPA and a native iOS/Android application. This structure is particularly well suited for web apps that want to share code to a native app.
 
 # Prerequisites
