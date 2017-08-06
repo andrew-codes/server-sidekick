@@ -22,6 +22,7 @@
     "native/eject": "build/bin/start-native.sh eject",
     "native/android": "build/bin/start-native.sh android",
     "native/ios": "build/bin/start-native.sh ios",
+    "native/start": "concurrently 'npm run native/ios' 'npm run api/run'",
     "prepublish/single": "cross-env NODE_ENV=production ./build/bin/prepublish.single.sh",
     "test": "cross-env NODE_ENV=test build/bin/test.sh",
     "test/single": "cross-env NODE_ENV=test build/bin/test.single.sh",

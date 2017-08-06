@@ -14,9 +14,13 @@ npm install
 npm run bootstrap
 ```
 
+## Running API Server
+- `npm run api/run`
+
 ## Running Web App
 
-- `npm run web`
+- `npm run web/run` (run UI web server only)
+- `npm run web/start` (run with API server)
 
 ## Running Native App
 
@@ -24,6 +28,7 @@ npm run bootstrap
 - `npm run native/ios`
 - `npm run native/android`
 - `npm run native/eject`
+- `npm run native/start` (run with API server)
 
 ## Validating/Testing
 
