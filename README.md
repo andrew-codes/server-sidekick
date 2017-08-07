@@ -11,11 +11,14 @@ This is a sample application to aid in bootstrapping other projects, as well as 
 
 ```bash
 npm install
+npm run api/restore
 npm run bootstrap
 ```
 
 ## Running API Server
 Ensure you [setup your env](packages/api/README.md) first.
+
+Ensure the environment variable `ASPNETCORE_ENVIRONMENT=Development` is set.
 
 - `npm run api/run`
 

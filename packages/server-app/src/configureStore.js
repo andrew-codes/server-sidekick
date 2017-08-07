@@ -1,4 +1,6 @@
+import createSagaMiddleware, {END} from 'redux-saga';
 import {createStore, applyMiddleware, compose} from 'redux';
+import {sagas} from 'v1-status-state-modules';
 import rootReducer from './reducer';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -8,8 +10,12 @@ const composeEnhancers = (isDevelopment)
     : compose;
 
 export default function configureStore(initialState = {}) {
+    const sagaMiddleware = createSagaMiddleware();
+    const websocketMiddleware = createSagaMiddleware();
 
     const middleware = [
+        sagaMiddleware,
+        websocketMiddleware,
     ];
 
     if (isDevelopment) {
@@ -29,5 +35,8 @@ export default function configureStore(initialState = {}) {
             store.replaceReducer(nextRootReducer);
         })
     }
+    websocketMiddleware.run(sagas.websocket('ws://localhost:5000/ws'));
+    store.runSaga = sagaMiddleware.run;
+    store.close = () => store.dispatch(END);
     return store;
 }
