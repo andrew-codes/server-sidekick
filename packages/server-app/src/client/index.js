@@ -18,7 +18,7 @@ const renderApp = (store) => {
     ), document.getElementById('root'));
 };
 
-const store = configureStore({});
+const store = configureStore(window.__PRELOADED_STATE__ || {});
 renderApp(store);
 
 if (module.hot) {
