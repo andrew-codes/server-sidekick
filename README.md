@@ -10,9 +10,14 @@ This is a sample application to aid in bootstrapping other projects, as well as 
 # Getting Started
 
 ```bash
+# after initial git clone in the repo folder
+cd packages/api
+git submodule update --init --recursive
+git checkout hackweek
+cd ../..
 npm install
-npm run api/restore
 npm run bootstrap
+npm run api/restore
 ```
 
 ## Running API Server
