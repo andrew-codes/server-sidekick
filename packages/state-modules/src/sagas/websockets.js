@@ -2,7 +2,7 @@ import {all, call, fork, put, take} from 'redux-saga/effects';
 import {eventChannel} from 'redux-saga';
 
 export default (url) => {
-    const initWebSocket = () => eventChannel(emitter => {
+    const initWebSocket = () => eventChannel(dispatch => {
         const ws = new WebSocket(url);
         ws.onopen = () => {
             console.log(`opening websocket: ${url}`);
@@ -13,7 +13,7 @@ export default (url) => {
         };
         ws.onmessage = (e) => {
             console.log(e);
-            // return emitter({type: 'TEST', data: e.data});
+            return dispatch({type: 'TEST', data: e.data});
         };
 
         return () => {

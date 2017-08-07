@@ -1,5 +1,4 @@
-import * as reducerFuncs from './reducers';
-import * as sagaFuncs from './sagas';
+import configureStoreFunc from './configureStore';
 
-export const reducers = reducerFuncs;
-export const sagas = sagaFuncs;
+export const configureStore = configureStoreFunc;
+
