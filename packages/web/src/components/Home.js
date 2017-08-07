@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {builds} from 'v1-status-state-modules';
 
 const Home = ({builds}) => (
     <div>
@@ -11,5 +12,5 @@ const Home = ({builds}) => (
 );
 
 export default connect((state) => ({
-    builds: Object.keys(state.builds).map(id => state.builds[id]),
+    builds: builds.selectors.getBuilds(state),
 }))(Home);

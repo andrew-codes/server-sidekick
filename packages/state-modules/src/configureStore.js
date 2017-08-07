@@ -1,6 +1,6 @@
 import createSagaMiddleware, {END} from 'redux-saga';
 import {createStore, applyMiddleware, compose} from 'redux';
-import reducer from './reducers';
+import reducer from './reducer';
 import websocketSaga from './sagas/websockets';
 
 export default function configureStore(initialState = {}, additionalMiddleware = [], composeFunc = compose) {
@@ -19,8 +19,8 @@ export default function configureStore(initialState = {}, additionalMiddleware =
     );
 
     if (module.hot) {
-        module.hot.accept('./reducers', () => {
-            const nextRootReducer = require('./reducers').default;
+        module.hot.accept('./reducer', () => {
+            const nextRootReducer = require('./reducer').default;
             store.replaceReducer(nextRootReducer);
         })
     }

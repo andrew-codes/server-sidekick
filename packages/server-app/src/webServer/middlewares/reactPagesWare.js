@@ -5,20 +5,15 @@ import {renderToString} from 'react-dom/server';
 import {App} from 'v1-status-web-ui';
 import renderFullPage from './../renderFullPage';
 import configureStore from './../../configureStore';
-import fetch from 'isomorphic-fetch';
+import {getBuildsSeedState} from 'v1-status-js-api';
 
 export default (req, res) => {
     const context = {};
 
-    fetch('http://hackweek:5000/api/Status/continuum')
-        .then(response => response.json())
-        .then(data => {
+    getBuildsSeedState()
+        .then(builds => {
             const initialState = {
-                builds: data.item2
-                    .reduce((output, item) => ({
-                        ...output,
-                        [item.instanceId]: item,
-                    }), {})
+                ...builds,
             };
             const store = configureStore(initialState);
 

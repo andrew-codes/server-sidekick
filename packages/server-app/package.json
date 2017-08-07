@@ -28,6 +28,8 @@
     "react-router-dom": "^4.1.2",
     "redux": "^3.7.2",
     "redux-saga": "^0.15.6",
+    "reselect": "^3.0.1",
+    "v1-status-js-api": "^0.0.1",
     "v1-status-state-modules": "^0.0.1",
     "v1-status-web-ui": "^0.0.1"
   },
