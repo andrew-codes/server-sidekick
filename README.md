@@ -4,16 +4,18 @@ This is a sample application to aid in bootstrapping other projects, as well as 
 
 # Prerequisites
 
-- nodejs@^6
-- npm@^5
+- [nodejs@^6.11.0](https://nodejs.org/en/download/)
+- npm@^5.0.0
+- [dotnet Core 2.0 Preview 2](https://www.microsoft.com/net/core/preview#windowscmd)
+- Bash (use Linux shell on Windows version@16.04)
 
 # Getting Started
 
 ```bash
 # after initial git clone in the repo folder
 cd packages/api
-git submodule update --init --recursive
-git checkout hackweek
+git submodule update --init --recursive #updates API git submodule
+git checkout hackweek # and checks out the hackweek branch
 cd ../..
 npm install
 npm run bootstrap
