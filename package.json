@@ -15,7 +15,7 @@
   "scripts": {
     "api/run": "build/bin/start-api.sh",
     "api/restore": "build/bin/restore-api.sh",
-    "bootstrap": "concurrently 'build/bin/bootstrap.sh' 'npm run api/restore'",
+    "bootstrap": "build/bin/bootstrap.sh",
     "bootstrap/single": "build/bin/bootstrap.single.sh",
     "lint": "build/bin/lint.sh",
     "native": "build/bin/start-native.sh start",
