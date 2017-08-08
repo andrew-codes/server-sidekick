@@ -20,8 +20,9 @@ export default (req, res) => {
 
     const theme = createMuiTheme({
         palette: createPalette({
-            primary: green,
             accent: red,
+            error: red,
+            primary: green,
             type: 'light',
         }),
     });

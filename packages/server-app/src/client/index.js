@@ -12,8 +12,9 @@ import configureStore from '../configureStore';
 const renderApp = (store) => {
     const theme = createMuiTheme({
         palette: createPalette({
-            primary: green,
             accent: red,
+            error: red,
+            primary: green,
             type: 'light',
         }),
     });
