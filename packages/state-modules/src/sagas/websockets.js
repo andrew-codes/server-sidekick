@@ -1,5 +1,6 @@
 import {all, call, fork, put, take} from 'redux-saga/effects';
 import {eventChannel} from 'redux-saga';
+import * as builds from './../builds';
 
 export default (url) => {
     const initWebSocket = () => eventChannel(dispatch => {
@@ -12,6 +13,8 @@ export default (url) => {
             console.dir(error)
         };
         ws.onmessage = (e) => {
+            const data = JSON.parse(e.data);
+            dispatch(builds.actionCreators.addBuilds(data));
             // return dispatch({type: 'TEST', data: e.data});
         };
 

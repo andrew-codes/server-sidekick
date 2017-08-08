@@ -2,7 +2,8 @@ import moment from 'moment';
 import {createSelector} from 'reselect';
 import {createActions, handleActions} from 'redux-actions';
 
-const applyTextFilterAction = 'applyTextFilter';
+const ApplyTextFilterAction = 'ApplyTextFilter';
+const AddBuilds = 'AddBuilds';
 
 const getRoot = (state) => state.builds;
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
@@ -31,7 +32,8 @@ export const selectors = {
 };
 
 const creators = createActions({
-    [applyTextFilterAction]: (value) => ({value}),
+    [ApplyTextFilterAction]: (value) => ({value}),
+    [AddBuilds]: (builds = [], lastRetrieval = (new Date()).toString()) => ({builds, lastRetrieval}),
 });
 export const actionCreators = creators;
 
@@ -39,8 +41,22 @@ const defaultState = {
     entities: {},
 };
 export default handleActions({
-    [applyTextFilterAction]: (state, {payload: {value}}) => ({
+    [ApplyTextFilterAction]: (state, {payload: {value}}) => ({
         ...state,
         textFilter: value,
-    })
+    }),
+    [AddBuilds]: (state, {payload: {builds, lastRetrieval}}) => ({
+        ...state,
+        entities: {
+            ...state.entities,
+            ...builds
+                .reduce((output, build) => ({
+                    ...output,
+                    [build.instanceId]: {
+                        ...build,
+                        lastRetrieval: lastRetrieval,
+                    },
+                }), {}),
+        },
+    }),
 }, defaultState);
