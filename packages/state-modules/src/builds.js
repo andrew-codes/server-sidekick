@@ -6,7 +6,13 @@ const applyTextFilterAction = 'applyTextFilter';
 const getRoot = (state) => state.builds;
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
 const getBuilds = createSelector(getRoot, root => Object.keys(root.entities).map(id => root.entities[id]));
-const getFilteredBuilds = createSelector([getBuilds, getTextFilterValue], (builds, textFilter) => builds.filter(build => build.name.indexOf(textFilter) >= 0));
+const getFilteredBuilds = createSelector([getBuilds, getTextFilterValue], (builds, textFilter) => {
+    if (!textFilter) {
+        return builds;
+    }
+    const filter = textFilter.toLowerCase();
+    return builds.filter(build => build.name.toLowerCase().indexOf(filter) >= 0);
+});
 export const selectors = {
     getBuilds,
     getFilteredBuilds,

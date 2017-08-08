@@ -9,7 +9,7 @@ const TextFilter = ({
         fullWidth={fullWidth}
         InputProps={{
             fullWidth,
-            onKeyDown: onChange,
+            onKeyUp: onChange,
         }}
     />
 
