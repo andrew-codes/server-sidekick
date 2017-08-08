@@ -1,6 +1,5 @@
 import React from 'react';
 import List, {ListSubheader} from 'material-ui/List';
-import {createStyleSheet, withStyles} from 'material-ui/styles';
 import StatusListItem from './StatusListItem';
 
 const StatusList = ({
@@ -12,6 +11,7 @@ const StatusList = ({
         >
             {builds.map((build, index) => (
                 <StatusListItem
+                    hasFailure={build.severity === 3}
                     key={index}
                     lastRetrieval={build.lastRetrieval}
                     name={build.name}

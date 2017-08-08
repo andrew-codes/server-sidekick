@@ -30,7 +30,10 @@ const withUnacknowledgedFailuresTheme = createMuiTheme({
     }),
 });
 
-const ApplicationBar = ({title, hasUnacknowledgedFailures}) => (
+const ApplicationBar = ({
+                            hasUnacknowledgedFailures,
+                            title,
+                        }) => (
     <MuiThemeProvider
         theme={hasUnacknowledgedFailures ? withUnacknowledgedFailuresTheme : withoutUnacknowledgedFailuresTheme}
     >

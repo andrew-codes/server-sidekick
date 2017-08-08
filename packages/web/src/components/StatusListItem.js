@@ -1,4 +1,6 @@
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
+import DoneIcon from 'material-ui-icons/Done';
+import ErrorIcon from 'material-ui-icons/Error';
 import IconButton from 'material-ui/IconButton';
 import React from 'react';
 import {
@@ -10,9 +12,12 @@ import {
 const StatusListItem = ({
                             lastRetrieval,
                             name,
-                            onSecondaryActionClick
+                            onSecondaryActionClick,
+                            hasFailure,
                         }) => (
     <ListItem>
+        {hasFailure && <ErrorIcon />}
+        {!hasFailure && <DoneIcon />}
         <ListItemText
             primary={name}
             secondary={`last updated ${lastRetrieval.format('MM/DD/YYYY hh:mm:ss')}`}
