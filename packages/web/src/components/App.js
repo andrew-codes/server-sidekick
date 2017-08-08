@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {builds} from 'v1-status-state-modules';
+import {connect} from 'react-redux';
 import {Route, Switch} from 'react-router';
 import ApplicationBar from './ApplicationBar';
 import Home from './containers/Home';
@@ -13,9 +15,15 @@ class App extends Component {
     }
 
     render() {
+        const {
+            hasUnacknowledgedFailures,
+        } = this.props;
         return (
             <div>
-                <ApplicationBar title="Builds" />
+                <ApplicationBar
+                    title="Builds"
+                    hasUnacknowledgedFailures={hasUnacknowledgedFailures}
+                />
                 <Switch>
                     <Route
                         component={Home}
@@ -29,4 +37,7 @@ class App extends Component {
     }
 }
 
-export default App;
+const stateToProps = (state) => ({
+    hasUnacknowledgedFailures: builds.selectors.hasUnacknowledgedFailures(state),
+});
+export default connect(stateToProps)(App);

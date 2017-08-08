@@ -5,9 +5,10 @@ import {createActions, handleActions} from 'redux-actions';
 const ApplyTextFilterAction = 'ApplyTextFilter';
 const AddBuilds = 'AddBuilds';
 
+// -- Selectors
 const getRoot = (state) => state.builds;
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
-const getTwentyBuilds = createSelector(getRoot, root => Object.keys(root.entities)
+const getTwentyBuilds = createSelector([getRoot], root => Object.keys(root.entities)
     .map(id => ({
         ...root.entities[id],
         lastRetrieval: moment(root.entities[id].lastRetrieval)
@@ -29,17 +30,21 @@ const getFilteredBuilds = createSelector([getTwentyBuilds, getTextFilterValue], 
     const filter = textFilter.toLowerCase();
     return builds.filter(build => build.name.toLowerCase().indexOf(filter) >= 0);
 });
+const hasUnacknowledgedFailures = createSelector([getFilteredBuilds], (builds) => builds.reduce((output, build) => output || build.severity === 3), false);
 export const selectors = {
     getBuilds: getTwentyBuilds,
     getFilteredBuilds,
+    hasUnacknowledgedFailures,
 };
 
+// -- Action creators
 const creators = createActions({
     [ApplyTextFilterAction]: (value) => ({value}),
     [AddBuilds]: (builds = [], lastRetrieval = (new Date()).toString()) => ({builds, lastRetrieval}),
 });
 export const actionCreators = creators;
 
+// -- Reducer
 const defaultState = {
     entities: {},
 };
