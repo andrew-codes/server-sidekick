@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import PipelineInstanceStatus from '../PipelineInstanceStatus/PipelineInstanceStatus';
 import {FlatList, View} from 'react-native';
@@ -14,6 +15,7 @@ export default class App extends React.Component {
                     renderItem={({item}) => (
                         <PipelineInstanceStatus
                             label={item.name}
+                            lastRetrieval={moment(item.lastRetrieval).format('MM/DD/YY hh:mm:ss')}
                             progress={item.progress}
                         />
                     )}
