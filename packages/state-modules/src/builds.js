@@ -8,7 +8,7 @@ const AddBuilds = 'AddBuilds';
 // -- Selectors
 const getRoot = (state) => state.builds;
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
-const getTwentyBuilds = createSelector([getRoot], root => Object.keys(root.entities)
+const getTwentyBuilds = createSelector(getRoot, root => Object.keys(root.entities)
     .map(id => ({
         ...root.entities[id],
         lastRetrieval: moment(root.entities[id].lastRetrieval)
@@ -23,14 +23,14 @@ const getTwentyBuilds = createSelector([getRoot], root => Object.keys(root.entit
         return 0;
     })
     .slice(0, 20));
-const getFilteredBuilds = createSelector([getTwentyBuilds, getTextFilterValue], (builds, textFilter) => {
+const getFilteredBuilds = createSelector(getTwentyBuilds, getTextFilterValue, (builds, textFilter) => {
     if (!textFilter) {
         return builds;
     }
     const filter = textFilter.toLowerCase();
     return builds.filter(build => build.name.toLowerCase().indexOf(filter) >= 0);
 });
-const hasUnacknowledgedFailures = createSelector([getFilteredBuilds], (builds) => builds.reduce((output, build) => output || build.severity === 3), false);
+const hasUnacknowledgedFailures = createSelector(getFilteredBuilds, (builds) => builds.reduce((output, build) => output || build.severity === 3, false));
 export const selectors = {
     getBuilds: getTwentyBuilds,
     getFilteredBuilds,
