@@ -13,6 +13,7 @@ const StatusList = ({
             {builds.map((build, index) => (
                 <StatusListItem
                     key={index}
+                    lastRetrieval={build.lastRetrieval}
                     name={build.name}
                     onSecondaryActionClick={console.log}
                 />

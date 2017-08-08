@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {createSelector} from 'reselect';
 import {createActions, handleActions} from 'redux-actions';
 
@@ -5,7 +6,18 @@ const applyTextFilterAction = 'applyTextFilter';
 
 const getRoot = (state) => state.builds;
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
-const getBuilds = createSelector(getRoot, root => Object.keys(root.entities).map(id => root.entities[id]));
+const getBuilds = createSelector(getRoot, root => Object.keys(root.entities)
+    .map(id => ({
+        ...root.entities[id],
+        lastRetrieval: moment(root.entities[id].lastRetrieval)
+    }))
+    .slice(0, 20)
+    .sort((a, b) => {
+        if (a.lastRetrieval.isBefore(b.lastRetrieval)) return 1;
+        if (b.lastRetrieval.isBefore(a.lastRetrieval)) return -1;
+        return 0;
+    })
+);
 const getFilteredBuilds = createSelector([getBuilds, getTextFilterValue], (builds, textFilter) => {
     if (!textFilter) {
         return builds;

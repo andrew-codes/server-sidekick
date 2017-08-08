@@ -8,7 +8,10 @@ export const getBuildsSeedState = (numberOfItems = 20) =>
                     entities: (data.continuumStatus || [])
                         .reduce((output, item) => ({
                             ...output,
-                            [item.instanceId]: item,
+                            [item.instanceId]: {
+                                ...item,
+                                lastRetrieval: (new Date()).toString(),
+                            },
                         }), {}),
                 },
             })

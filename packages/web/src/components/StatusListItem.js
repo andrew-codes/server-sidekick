@@ -8,11 +8,15 @@ import {
 } from 'material-ui/List';
 
 const StatusListItem = ({
+                            lastRetrieval,
                             name,
                             onSecondaryActionClick
                         }) => (
     <ListItem>
-        <ListItemText primary={name} />
+        <ListItemText
+            primary={name}
+            secondary={lastRetrieval.format('MM/DD/YYYY hh:mm:ss')}
+        />
         <ListItemSecondaryAction>
             <IconButton
                 aria-label="Favorite"
