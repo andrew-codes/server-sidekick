@@ -9,6 +9,10 @@ export default StyleSheet.create({
 
   },
   item: {
-    height: 6,
+    height: 15,
+  },
+  label: {
+    fontSize: 20,
+    fontFamily: 'Georgia',
   }
 });
