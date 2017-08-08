@@ -96,6 +96,8 @@ export default handleActions({
     }),
     [MuteBuilds]: (state, {payload: {ids}}) => ({
         ...state,
-        muted: (state.muted || []).concat(ids),
+        muted: (state.muted || [])
+            .filter(id => ids.indexOf(id) < 0)
+            .concat(ids),
     }),
 }, defaultState);
