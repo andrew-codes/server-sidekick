@@ -1,5 +1,6 @@
+import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
+import IconButton from 'material-ui/IconButton';
 import React from 'react';
-import Switch from 'material-ui/Switch';
 import {
     ListItem,
     ListItemSecondaryAction,
@@ -13,10 +14,12 @@ const StatusListItem = ({
     <ListItem>
         <ListItemText primary={name} />
         <ListItemSecondaryAction>
-            <Switch
+            <IconButton
+                aria-label="Favorite"
                 onClick={onSecondaryActionClick}
-                checked={false}
-            />
+            >
+                <FavoriteBorderIcon />
+            </IconButton>
         </ListItemSecondaryAction>
     </ListItem>
 );
