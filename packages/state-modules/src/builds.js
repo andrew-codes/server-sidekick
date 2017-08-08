@@ -12,13 +12,16 @@ const getTwentyBuilds = createSelector(getRoot, root => Object.keys(root.entitie
         ...root.entities[id],
         lastRetrieval: moment(root.entities[id].lastRetrieval)
     }))
-    .slice(0, 20)
     .sort((a, b) => {
-        if (a.lastRetrieval.isBefore(b.lastRetrieval)) return 1;
-        if (b.lastRetrieval.isBefore(a.lastRetrieval)) return -1;
+        if (a.lastRetrieval.isAfter(b.lastRetrieval)) {
+            return -1;
+        }
+        if (b.lastRetrieval.isAfter(a.lastRetrieval)) {
+            return 1;
+        }
         return 0;
     })
-);
+    .slice(0, 20));
 const getFilteredBuilds = createSelector([getTwentyBuilds, getTextFilterValue], (builds, textFilter) => {
     if (!textFilter) {
         return builds;
