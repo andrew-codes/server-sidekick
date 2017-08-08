@@ -1,7 +1,9 @@
-import fetch from 'isomorphic-fetch';
+if (typeof process !== 'undefined') {
+    require('isomorphic-fetch');
+}
 
-export const getBuildsSeedState = (numberOfItems = 20) =>
-    fetch(`http://hackweek:5000/api/Status/continuum?count=${encodeURIComponent(numberOfItems.toString())}`)
+export const getBuildsSeedState = (numberOfItems = 20) => {
+    return fetch(`http://hackweek:5000/api/Status/continuum?count=${encodeURIComponent(numberOfItems.toString())}`)
         .then(response => response.json())
         .then(data => ({
                 builds: {
@@ -16,3 +18,4 @@ export const getBuildsSeedState = (numberOfItems = 20) =>
                 },
             })
         );
+}

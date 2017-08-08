@@ -1,9 +1,12 @@
 import moment from 'moment';
 import {createSelector} from 'reselect';
 import {createActions, handleActions} from 'redux-actions';
+import {getBuildsSeedState} from 'v1-status-js-api';
 
 const ApplyTextFilterAction = 'ApplyTextFilter';
 const AddBuilds = 'AddBuilds';
+const FetchBuilds = 'FetchBuilds';
+const FetchBuildsSuccess = 'FetchBuilds-Success';
 
 // -- Selectors
 const getRoot = (state) => state.builds;
@@ -11,7 +14,8 @@ const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
 const getTwentyBuilds = createSelector(getRoot, root => Object.keys(root.entities)
     .map(id => ({
         ...root.entities[id],
-        lastRetrieval: moment(root.entities[id].lastRetrieval)
+        lastRetrieval: moment(root.entities[id].lastRetrieval),
+        progress: 0,
     }))
     .sort((a, b) => {
         if (a.lastRetrieval.isAfter(b.lastRetrieval)) {
@@ -42,7 +46,19 @@ const creators = createActions({
     [ApplyTextFilterAction]: (value) => ({value}),
     [AddBuilds]: (builds = [], lastRetrieval = (new Date()).toString()) => ({builds, lastRetrieval}),
 });
-export const actionCreators = creators;
+const fetchBuilds = (numberToFetch = 20) => (dispatch) => {
+    getBuildsSeedState(numberToFetch)
+        .then(data => {
+            dispatch({
+                type: FetchBuildsSuccess,
+                payload: data,
+            });
+        });
+};
+export const actionCreators = {
+    ...creators,
+    fetchBuilds,
+};
 
 // -- Reducer
 const defaultState = {
@@ -65,6 +81,13 @@ export default handleActions({
                         lastRetrieval: lastRetrieval,
                     },
                 }), {}),
+        },
+    }),
+    [FetchBuildsSuccess]: (state, {payload: {builds: {entities}}}) => ({
+        ...state,
+        entities: {
+            ...state.entities,
+            ...entities,
         },
     }),
 }, defaultState);

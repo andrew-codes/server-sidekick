@@ -24,11 +24,13 @@
     "react": "16.0.0-alpha.6",
     "react-native": "^0.44.0",
     "react-native-progress": "^3.3.0",
+    "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
-    "redux-saga": "^0.15.6",
-    "reselect": "^3.0.1",
     "redux-logger": "^3.0.6",
+    "redux-saga": "^0.15.6",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
     "v1-status-js-api": "^0.0.1",
     "v1-status-state-modules": "^0.0.1"
   },
@@ -38,7 +40,6 @@
   "devDependencies": {
     "haul": "^1.0.0-beta.4",
     "jest-expo": "~1.0.1",
-    "react-native-scripts": "^0.0.31",
     "react-test-renderer": "16.0.0-alpha.6"
   }
 }

@@ -1,4 +1,5 @@
 import createSagaMiddleware, {END} from 'redux-saga';
+import thunkMiddleware from 'redux-thunk';
 import {createStore, applyMiddleware, compose} from 'redux';
 import reducer from './reducer';
 import websocketSaga from './sagas/websockets';
@@ -8,6 +9,7 @@ export default function configureStore(initialState = {}, additionalMiddleware =
     const websocketMiddleware = createSagaMiddleware();
 
     const middleware = additionalMiddleware.concat([
+        thunkMiddleware,
         sagaMiddleware,
         websocketMiddleware,
     ]);

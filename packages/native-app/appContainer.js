@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
-//import {ActionCreators} from './actions';
-import {bindActionCreators} from 'redux'
+import {bindActionCreators} from 'redux';
+import {builds} from 'v1-status-state-modules';
 import {connect} from 'react-redux'
 import PipelineInstancesList from './components/PipelineInstancesList/PipelineInstancesList';
 
 class AppContainer extends Component {
+    componentDidMount() {
+        this.props.fetchBuilds();
+    }
+
     render() {
         return (
             <PipelineInstancesList
@@ -14,19 +18,16 @@ class AppContainer extends Component {
     }
 }
 
-// function mapDispatchToProps(dispatch) {
-//     return bindActionCreators(ActionCreators, dispatch)
-// }
-
 function mapStateToProps(state) {
     return {
-        pis: [
-            {label: "one", progress: .4, key: 1},
-            {label: "two", progress: .7, key: 2},
-            {label: "three", progress: .25, key: 3},
-            {label: "four", progress: 1, key: 4},
-        ],
+        pis: builds.selectors.getFilteredBuilds(state),
     };
 }
 
-export default connect(mapStateToProps)(AppContainer);
+function dispatchToProps(dispatch) {
+    return {
+        fetchBuilds: bindActionCreators(builds.actionCreators.fetchBuilds, dispatch),
+    };
+}
+
+export default connect(mapStateToProps, dispatchToProps)(AppContainer);

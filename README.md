@@ -19,7 +19,6 @@ git checkout hackweek # and checks out the hackweek branch
 cd ../..
 npm install
 npm run bootstrap
-npm run api/restore
 ```
 
 ## Running API Server
@@ -36,11 +35,11 @@ Ensure the environment variable `ASPNETCORE_ENVIRONMENT=Development` is set.
 
 ## Running Native App
 
-- `npm run native`
-- `npm run native/ios`
-- `npm run native/android`
-- `npm run native/eject`
-- `npm run native/start` (run with API server)
+```
+cd packages/native-app
+npm run haul
+react-native run-ios # in a different console instance
+```
 
 ## Validating/Testing
 
