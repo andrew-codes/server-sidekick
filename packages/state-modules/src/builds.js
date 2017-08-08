@@ -7,7 +7,7 @@ const AddBuilds = 'AddBuilds';
 
 const getRoot = (state) => state.builds;
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
-const getBuilds = createSelector(getRoot, root => Object.keys(root.entities)
+const getTwentyBuilds = createSelector(getRoot, root => Object.keys(root.entities)
     .map(id => ({
         ...root.entities[id],
         lastRetrieval: moment(root.entities[id].lastRetrieval)
@@ -19,7 +19,7 @@ const getBuilds = createSelector(getRoot, root => Object.keys(root.entities)
         return 0;
     })
 );
-const getFilteredBuilds = createSelector([getBuilds, getTextFilterValue], (builds, textFilter) => {
+const getFilteredBuilds = createSelector([getTwentyBuilds, getTextFilterValue], (builds, textFilter) => {
     if (!textFilter) {
         return builds;
     }
@@ -27,7 +27,7 @@ const getFilteredBuilds = createSelector([getBuilds, getTextFilterValue], (build
     return builds.filter(build => build.name.toLowerCase().indexOf(filter) >= 0);
 });
 export const selectors = {
-    getBuilds,
+    getBuilds: getTwentyBuilds,
     getFilteredBuilds,
 };
 
