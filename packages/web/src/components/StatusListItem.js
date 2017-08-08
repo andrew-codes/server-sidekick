@@ -15,7 +15,7 @@ const StatusListItem = ({
     <ListItem>
         <ListItemText
             primary={name}
-            secondary={lastRetrieval.format('MM/DD/YYYY hh:mm:ss')}
+            secondary={`last updated ${lastRetrieval.format('MM/DD/YYYY hh:mm:ss')}`}
         />
         <ListItemSecondaryAction>
             <IconButton
