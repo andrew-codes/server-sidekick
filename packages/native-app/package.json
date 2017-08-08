@@ -13,9 +13,10 @@
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
+    "ios": "react-native run-ios",
     "prepublish": "",
-    "test": "{ cd ../../; npm run test/single v1-mobile; };"
+    "test": "{ cd ../../; npm run test/single v1-mobile; };",
+    "haul": "haul start"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
@@ -27,7 +28,9 @@
     "redux-actions": "^2.2.1",
     "redux-saga": "^0.15.6",
     "reselect": "^3.0.1",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "v1-status-js-api": "^0.0.1",
+    "v1-status-state-modules": "^0.0.1"
   },
   "jest": {
     "preset": "jest-expo"

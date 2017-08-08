@@ -26,4 +26,4 @@ export default class App extends Component {
     }
 }
 
-AppRegistry.registerComponent('continuumStatus', () => App);
+AppRegistry.registerComponent('ContinuumStatusMobile', () => App);
