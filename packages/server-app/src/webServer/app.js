@@ -8,7 +8,7 @@ export default (server) => {
     server.use(reactPagesWare.unless({
         path: [
             '/dist/client/index.js',
-            '/__webpack_hmr'
+            '/__webpack_hmr',
         ],
     }));
     return server;

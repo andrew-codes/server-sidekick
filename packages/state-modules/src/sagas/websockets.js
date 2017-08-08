@@ -12,8 +12,7 @@ export default (url) => {
             console.dir(error)
         };
         ws.onmessage = (e) => {
-            console.log(e);
-            return dispatch({type: 'TEST', data: e.data});
+            // return dispatch({type: 'TEST', data: e.data});
         };
 
         return () => {

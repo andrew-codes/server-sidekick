@@ -1,3 +1,6 @@
-export const noop = (state = {}, action) => state;
+import {combineReducers} from 'redux';
+import builds from './builds';
 
-export default noop;
+export default combineReducers({
+    builds,
+})
