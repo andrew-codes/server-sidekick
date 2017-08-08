@@ -1,23 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import PipelineInstancesList from './components/PipelineInstancesList/PipelineInstancesList';
 
 export default class App extends React.Component {
   render() {
+    const pis = [
+      {label: "one", progress: .4, key:1},
+      {label: "two", progress: .7, key:2},
+      {label: "three", progress: .25, key:3},
+      {label: "four", progress: 1, key:4},
+    ]
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <PipelineInstancesList
+        pipelineInstances={pis}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
