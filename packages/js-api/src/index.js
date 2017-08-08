@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 export const getBuildsSeedState = (numberOfItems = 20) =>
-    fetch('http://hackweek:5000/api/Status/continuum')
+    fetch(`http://hackweek:5000/api/Status/continuum?count=${encodeURIComponent(numberOfItems.toString())}`)
         .then(response => response.json())
         .then(data => ({
                 builds: {
