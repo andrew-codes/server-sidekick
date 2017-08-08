@@ -35,6 +35,7 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-saga": "^0.15.6",
+    "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "v1-status-js-api": "^0.0.1",
     "v1-status-state-modules": "^0.0.1",
