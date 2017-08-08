@@ -1,5 +1,15 @@
 {
   "presets": ["babel-preset-expo"],
+  "plugins": [
+    "transform-object-rest-spread",
+    [
+      "transform-runtime",
+      {
+        "polyfill": true,
+        "regenerator": true
+      }
+    ]
+  ],
   "env": {
     "development": {
       "plugins": ["transform-react-jsx-source"]
