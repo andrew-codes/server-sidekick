@@ -37,7 +37,7 @@ export default (req, res) => {
 
             const store = configureStore(initialState);
 
-            let markup = renderToString(
+            let html = renderToString(
                 <StaticRouter
                     location={req.url}
                     context={context}
@@ -57,8 +57,9 @@ export default (req, res) => {
                 return;
             }
 
+            const css = sheetsRegistry.toString();
             res
                 .status(context.status || 200)
-                .send(renderFullPage(markup, initialState));
+                .send(renderFullPage({html, css}, initialState));
         });
 };

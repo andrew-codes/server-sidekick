@@ -1,4 +1,4 @@
-export default (html, initialState = {}) =>
+export default ({html, css}, initialState = {}) =>
     `<!doctype html>
 <html>
   <head>
@@ -9,6 +9,7 @@ export default (html, initialState = {}) =>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
   </head>
   <body style="margin: auto 0;">
+  <style id="jss-server-side">${css}</style>
   <div id="root">${html}</div>
   <script>
     window.__PRELOADED_STATE__=${JSON.stringify(initialState).replace(/</g, '\\u003c')}
