@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "author": "VersionOne",
-  "contributors":[
+  "contributors": [
     "Andrew Smith <andrew.codes>"
   ],
   "scripts": {
@@ -20,7 +20,8 @@
   "dependencies": {
     "expo": "^17.0.0",
     "react": "16.0.0-alpha.6",
-    "react-native": "^0.44.0"
+    "react-native": "^0.44.0",
+    "react-native-progress": "^3.3.0"
   },
   "jest": {
     "preset": "jest-expo"
