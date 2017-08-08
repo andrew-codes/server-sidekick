@@ -5,7 +5,7 @@ export const getBuildsSeedState = (numberOfItems = 20) =>
         .then(response => response.json())
         .then(data => ({
                 builds: {
-                    entities: data.item2
+                    entities: (data.continuumStatus || [])
                         .reduce((output, item) => ({
                             ...output,
                             [item.instanceId]: item,
