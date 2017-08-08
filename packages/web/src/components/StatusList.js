@@ -4,6 +4,8 @@ import StatusListItem from './StatusListItem';
 
 const StatusList = ({
                         builds,
+                        onFavorited,
+                        onMuted,
                         title,
                     }) => (
         <List
@@ -12,10 +14,12 @@ const StatusList = ({
             {builds.map((build, index) => (
                 <StatusListItem
                     hasFailure={build.severity === 3}
+                    id={build.instanceId}
                     key={index}
                     lastRetrieval={build.lastRetrieval}
                     name={build.name}
-                    onSecondaryActionClick={console.log}
+                    onFavorited={onFavorited}
+                    onMuted={onMuted}
                 />
             ))
             }

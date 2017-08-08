@@ -18,7 +18,8 @@ const styleSheet = createStyleSheet(theme => ({
 const Home = ({
                   builds,
                   classes,
-                  onFilterValueChange
+                  onFilterValueChange,
+                  onMuteBuilds,
               }) => (
     <div>
         <Paper
@@ -39,6 +40,8 @@ const Home = ({
             />
             <StatusList
                 builds={builds}
+                onFavorited={console.log}
+                onMuted={(id) => onMuteBuilds([id])}
             />
         </Paper>
     </div>
@@ -49,6 +52,7 @@ const stateToProps = (state) => ({
 });
 const dispatchToProps = (dispatch) => ({
     onFilterValueChange: bindActionCreators(builds.actionCreators.applyTextFilter, dispatch),
+    onMuteBuilds: bindActionCreators(builds.actionCreators.muteBuilds, dispatch),
 });
 
 export default connect(stateToProps, dispatchToProps)(withStyles(styleSheet)(Home));

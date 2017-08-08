@@ -5,8 +5,8 @@ import {getBuildsSeedState} from 'v1-status-js-api';
 
 const ApplyTextFilterAction = 'ApplyTextFilter';
 const AddBuilds = 'AddBuilds';
-const FetchBuilds = 'FetchBuilds';
 const FetchBuildsSuccess = 'FetchBuilds-Success';
+const MuteBuilds = 'MuteBuilds';
 
 // -- Selectors
 const getRoot = (state) => state.builds;
@@ -34,7 +34,10 @@ const getFilteredBuilds = createSelector(getTwentyBuilds, getTextFilterValue, (b
     const filter = textFilter.toLowerCase();
     return builds.filter(build => build.name.toLowerCase().indexOf(filter) >= 0);
 });
-const hasUnacknowledgedFailures = createSelector(getFilteredBuilds, (builds) => builds.reduce((output, build) => output || build.severity === 3, false));
+const getMutedBuildIds = createSelector(getRoot, root => root.muted || []);
+const hasUnacknowledgedFailures = createSelector(getFilteredBuilds, getMutedBuildIds, (builds, mutedBuildIds) => builds.reduce((output, build) => (
+    output || (mutedBuildIds.indexOf(build.instanceId) < 0 && build.severity === 3)
+), false));
 export const selectors = {
     getBuilds: getTwentyBuilds,
     getFilteredBuilds,
@@ -43,8 +46,9 @@ export const selectors = {
 
 // -- Action creators
 const creators = createActions({
-    [ApplyTextFilterAction]: (value) => ({value}),
+    [ApplyTextFilterAction]: value => ({value}),
     [AddBuilds]: (builds = [], lastRetrieval = (new Date()).toString()) => ({builds, lastRetrieval}),
+    [MuteBuilds]: ids => ({ids}),
 });
 const fetchBuilds = (numberToFetch = 20) => (dispatch) => {
     getBuildsSeedState(numberToFetch)
@@ -89,5 +93,9 @@ export default handleActions({
             ...state.entities,
             ...entities,
         },
+    }),
+    [MuteBuilds]: (state, {payload: {ids}}) => ({
+        ...state,
+        muted: (state.muted || []).concat(ids),
     }),
 }, defaultState);

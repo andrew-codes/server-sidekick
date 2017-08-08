@@ -3,6 +3,7 @@ import Done from 'material-ui-icons/Done';
 import Error from 'material-ui-icons/Error';
 import IconButton from 'material-ui/IconButton';
 import React from 'react';
+import VolumeOff from 'material-ui-icons/VolumeOff';
 import {createStyleSheet, withStyles} from 'material-ui/styles';
 import {green, red} from 'material-ui/colors';
 
@@ -26,9 +27,11 @@ const ErrorIcon = withStyles(styleSheetError)(Error);
 const NoFailureIcon = withStyles(styleSheetOk)(Done);
 
 const StatusListItem = ({
+                            id,
                             lastRetrieval,
                             name,
-                            onSecondaryActionClick,
+                            onFavorited,
+                            onMuted,
                             hasFailure,
                         }) => (
     <ListItem>
@@ -40,8 +43,14 @@ const StatusListItem = ({
         />
         <ListItemSecondaryAction>
             <IconButton
+                aria-label="Mute"
+                onClick={(evt) => onMuted(id)}
+            >
+                <VolumeOff />
+            </IconButton>
+            <IconButton
                 aria-label="Favorite"
-                onClick={onSecondaryActionClick}
+                onClick={evt => onFavorited(id)}
             >
                 <FavoriteBorderIcon />
             </IconButton>
