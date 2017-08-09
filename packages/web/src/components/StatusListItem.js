@@ -42,7 +42,7 @@ const StatusListItem = ({
                             hasFailure,
                         }) => (
     <ListItem className={classes.root}>
-        {hasFailure && <ErrorIcon className={!muted && classes.errorIcon} />}
+        {hasFailure && <ErrorIcon className={!muted ? classes.errorIcon : ''} />}
         {!hasFailure && <NoFailureIcon className={classes.noFailureIcon} />}
         <ListItemText
             primary={name}
@@ -53,7 +53,7 @@ const StatusListItem = ({
                 aria-label="Mute"
                 onClick={(evt) => onMuted(id)}
             >
-                <VolumeOff className={muted && classes.mutedIcon} />
+                <VolumeOff className={muted ? classes.mutedIcon :  ''} />
             </IconButton>
             <IconButton
                 aria-label="Favorite"
