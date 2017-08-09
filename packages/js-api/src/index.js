@@ -3,7 +3,7 @@ if (typeof process !== 'undefined') {
 }
 
 export const getBuildsSeedState = (numberOfItems = 20) => {
-    return fetch(`http://hackweek.dev.corp.versionone.net/:5000/api/Status/continuum?count=${encodeURIComponent(numberOfItems.toString())}`)
+    return fetch(`http://hackweek.dev.corp.versionone.net:5000/api/Status/continuum?count=${encodeURIComponent(numberOfItems.toString())}`)
         .then(response => response.json())
         .then(data => ({
                 builds: {
