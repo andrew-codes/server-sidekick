@@ -7,6 +7,7 @@ const ApplyTextFilterAction = 'ApplyTextFilter';
 const AddBuilds = 'AddBuilds';
 const FetchBuildsSuccess = 'FetchBuilds-Success';
 const MuteBuilds = 'MuteBuilds';
+const MarkNotified = 'MarkNotified';
 
 // -- Selectors
 const getRoot = (state) => state.builds;
@@ -51,6 +52,7 @@ const creators = createActions({
     [ApplyTextFilterAction]: value => ({value}),
     [AddBuilds]: (builds = [], lastRetrieval = (new Date()).toString()) => ({builds, lastRetrieval}),
     [MuteBuilds]: ids => ({ids}),
+    [MarkNotified]: ids => ({ids}),
 });
 const fetchBuilds = (numberToFetch = 20) => (dispatch) => {
     getBuildsSeedState(numberToFetch)
@@ -103,4 +105,19 @@ export default handleActions({
             .filter(id => ids.indexOf(id) < 0)
             .concat(ids),
     }),
+    [MarkNotified]: (state, {payload: {ids}}) => ({
+        ...state,
+        entities: {
+            ...state.entities,
+            ...ids
+                .reduce((output, id) => ({
+                    ...output,
+                    [id]: {
+                        ...state.entities[id],
+                        notified: true,
+                    }
+                }), {})
+        }
+    })
+
 }, defaultState);

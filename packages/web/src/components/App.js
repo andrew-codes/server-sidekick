@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
 import {builds} from 'v1-status-state-modules';
 import {connect} from 'react-redux';
 import {Route, Switch} from 'react-router';
@@ -18,14 +19,18 @@ class App extends Component {
 
     render() {
         const {
-            unNotifiedBuilds,
             hasUnacknowledgedFailures,
+            markNotified,
+            unNotifiedBuilds,
         } = this.props;
-        const faviconSrc = !hasUnacknowledgedFailures ? "/static/pass.ico" :"/static/fail.ico";
+        const faviconSrc = !hasUnacknowledgedFailures ? "/static/pass.ico" : "/static/fail.ico";
         return (
             <div>
-                <BrowserTabFavicon src={faviconSrc}/>
-                <Notify builds={unNotifiedBuilds} />
+                <BrowserTabFavicon src={faviconSrc} />
+                <Notify
+                    builds={unNotifiedBuilds}
+                    markNotified={markNotified}
+                />
                 <ApplicationBar
                     title="Builds"
                     hasUnacknowledgedFailures={hasUnacknowledgedFailures}
@@ -47,4 +52,7 @@ const stateToProps = (state) => ({
     hasUnacknowledgedFailures: builds.selectors.hasUnacknowledgedFailures(state),
     unNotifiedBuilds: builds.selectors.getUnNotifiedFailedBuilds(state),
 });
-export default connect(stateToProps)(App);
+const dispatchToProps = (dispatch) => ({
+    markNotified: bindActionCreators(builds.actionCreators.markNotified, dispatch),
+});
+export default connect(stateToProps, dispatchToProps)(App);
