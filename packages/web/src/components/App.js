@@ -2,12 +2,19 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {builds} from 'v1-status-state-modules';
 import {connect} from 'react-redux';
+import {createStyleSheet, withStyles} from 'material-ui/styles';
 import {Route, Switch} from 'react-router';
 import ApplicationBar from './ApplicationBar';
 import BrowserTabFavicon from './BrowserTabFavicon';
 import Home from './containers/Home';
 import NotFound from './Router/NotFound';
 import Notify from './Notify';
+
+const stylesheet = createStyleSheet({
+    body: {
+        paddingTop: '60px',
+    },
+});
 
 class App extends Component {
     componentDidMount() {
@@ -19,6 +26,7 @@ class App extends Component {
 
     render() {
         const {
+            classes,
             hasUnacknowledgedFailures,
             markNotified,
             unNotifiedBuilds,
@@ -35,14 +43,16 @@ class App extends Component {
                     title="Builds"
                     hasUnacknowledgedFailures={hasUnacknowledgedFailures}
                 />
-                <Switch>
-                    <Route
-                        component={Home}
-                        exact={true}
-                        path="/"
-                    />
-                    <NotFound />
-                </Switch>
+                <div className={classes.body}>
+                    <Switch>
+                        <Route
+                            component={Home}
+                            exact={true}
+                            path="/"
+                        />
+                        <NotFound />
+                    </Switch>
+                </div>
             </div>
         );
     }
@@ -55,4 +65,4 @@ const stateToProps = (state) => ({
 const dispatchToProps = (dispatch) => ({
     markNotified: bindActionCreators(builds.actionCreators.markNotified, dispatch),
 });
-export default connect(stateToProps, dispatchToProps)(App);
+export default connect(stateToProps, dispatchToProps)(withStyles(stylesheet)(App));

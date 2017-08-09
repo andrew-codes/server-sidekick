@@ -19,7 +19,7 @@ const ApplicationBar = ({
                         }) => (
     <AppBar
         color={hasUnacknowledgedFailures ? 'accent' : 'primary'}
-        position="static"
+        position="fixed"
     >
         <Toolbar>
             <IconButton
