@@ -18,7 +18,7 @@ const StatusList = ({
                     key={index}
                     lastRetrieval={build.lastRetrieval}
                     muted={build.muted}
-                    name={build.name}
+                    name={`${build.name} - ${build.pipelineName}`}
                     onFavorited={onFavorited}
                     onMuted={onMuted}
                 />
