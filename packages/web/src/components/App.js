@@ -3,6 +3,7 @@ import {builds} from 'v1-status-state-modules';
 import {connect} from 'react-redux';
 import {Route, Switch} from 'react-router';
 import ApplicationBar from './ApplicationBar';
+import BrowserTabFavicon from './BrowserTabFavicon';
 import Home from './containers/Home';
 import NotFound from './Router/NotFound';
 
@@ -18,8 +19,10 @@ class App extends Component {
         const {
             hasUnacknowledgedFailures,
         } = this.props;
+        const faviconSrc = !hasUnacknowledgedFailures ? "/static/pass.ico" :"/static/fail.ico";
         return (
             <div>
+                <BrowserTabFavicon src={faviconSrc}/>
                 <ApplicationBar
                     title="Builds"
                     hasUnacknowledgedFailures={hasUnacknowledgedFailures}
