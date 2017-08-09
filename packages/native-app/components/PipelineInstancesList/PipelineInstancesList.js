@@ -17,6 +17,7 @@ export default class App extends React.Component {
                             label={`${item.name} ${item.group} ${item.project}`}
                             lastRetrieval={moment(item.lastRetrieval).format('MM/DD/YY hh:mm:ss')}
                             progress={item.progress}
+                            status={item.status}
                         />
                     )}
                 />

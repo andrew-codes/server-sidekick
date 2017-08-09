@@ -1,6 +1,7 @@
 import React from 'react';
 import {Bar} from 'react-native-progress';
 import {Text, View} from 'react-native';
+import StatusIcon from '../StatusIcon/StatusIcon';
 import styles from './styles';
 
 export default class PipelineInstanceStatus extends React.Component {
@@ -9,11 +10,21 @@ export default class PipelineInstanceStatus extends React.Component {
             label,
             lastRetrieval,
             progress,
+            status
         } = this.props;
         return (
             <View style={styles.container}>
-                <Text>{label}</Text>
-                <Text>{lastRetrieval}</Text>
+                <View style={styles.top}>
+                    <StatusIcon
+                        style={styles.icon}
+                        status={status}
+                    />
+                    <Text style={styles.text1}>{label}</Text>
+                    <View/>
+                </View>
+                <View style={styles.bottom}>
+                    <Text style={styles.text2}>{lastRetrieval}</Text>
+                </View>
             </View>
         );
     }
