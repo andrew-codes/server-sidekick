@@ -3,6 +3,8 @@ import {bindActionCreators} from 'redux';
 import {builds} from 'v1-status-state-modules';
 import {connect} from 'react-redux'
 import PipelineInstancesList from './components/PipelineInstancesList/PipelineInstancesList';
+import Notifications from './components/Notifications/Notifications'
+
 
 class AppContainer extends Component {
     componentDidMount() {
@@ -11,9 +13,7 @@ class AppContainer extends Component {
 
     render() {
         return (
-            <PipelineInstancesList
-                pipelineInstances={this.props.pis}
-            />
+            <Notifications/>
         )
     }
 }
