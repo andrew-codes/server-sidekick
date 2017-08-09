@@ -11,7 +11,7 @@ export default (server) => {
     reactPagesWare.unless = unless;
     server.use(reactPagesWare.unless((req) => {
         const pathname = url.parse(req.originalUrl).pathname;
-        if (pathname.indexOf('/__webpack_hmr') >= 0) {
+        if (pathname.indexOf('__webpack_hmr') >= 0) {
             return true;
         }
         const extensionsToIgnore = [
