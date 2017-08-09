@@ -8,7 +8,6 @@ class Notify extends Component {
     componentWillUpdate(nextProps) {
         nextProps.builds
             .forEach(this.notify);
-        console.log(nextProps.builds);
         nextProps.markNotified(nextProps.builds.map(build => build.instanceId));
     }
 
