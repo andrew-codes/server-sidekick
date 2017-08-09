@@ -26,15 +26,25 @@ const styleSheetOk = createStyleSheet({
 const ErrorIcon = withStyles(styleSheetError)(Error);
 const NoFailureIcon = withStyles(styleSheetOk)(Done);
 
+const listItemStyleSheet = createStyleSheet({
+    root: {
+        '&:hover': {
+            background: 'rgba(0,0,0,0.1)',
+        },
+        transition: 'background-color 150ms cubic-bezier(0.4, 0.0, 0.2, 1) 0ms',
+    }
+});
+
 const StatusListItem = ({
                             id,
+                            classes,
                             lastRetrieval,
                             name,
                             onFavorited,
                             onMuted,
                             hasFailure,
                         }) => (
-    <ListItem>
+    <ListItem className={classes.root}>
         {hasFailure && <ErrorIcon />}
         {!hasFailure && <NoFailureIcon />}
         <ListItemText
@@ -58,4 +68,4 @@ const StatusListItem = ({
     </ListItem>
 );
 
-export default StatusListItem;
+export default withStyles(listItemStyleSheet)(StatusListItem);
