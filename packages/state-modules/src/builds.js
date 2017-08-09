@@ -11,10 +11,12 @@ const MuteBuilds = 'MuteBuilds';
 // -- Selectors
 const getRoot = (state) => state.builds;
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
-const getTwentyBuilds = createSelector(getRoot, root => Object.keys(root.entities)
+const getMutedBuildIds = createSelector(getRoot, root => root.muted || []);
+const getTwentyBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedIds) => Object.keys(root.entities)
     .map(id => ({
         ...root.entities[id],
         lastRetrieval: moment(root.entities[id].lastRetrieval),
+        muted: mutedIds.indexOf(id) >= 0,
         progress: 0,
     }))
     .sort((a, b) => {
@@ -34,9 +36,8 @@ const getFilteredBuilds = createSelector(getTwentyBuilds, getTextFilterValue, (b
     const filter = textFilter.toLowerCase();
     return builds.filter(build => build.name.toLowerCase().indexOf(filter) >= 0);
 });
-const getMutedBuildIds = createSelector(getRoot, root => root.muted || []);
 const hasUnacknowledgedFailures = createSelector(getFilteredBuilds, getMutedBuildIds, (builds, mutedBuildIds) => builds.reduce((output, build) => (
-    output || (mutedBuildIds.indexOf(build.instanceId) < 0 && build.severity === 3)
+    output || (!build.muted && build.severity === 3)
 ), false));
 export const selectors = {
     getBuilds: getTwentyBuilds,

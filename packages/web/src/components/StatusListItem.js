@@ -1,6 +1,6 @@
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
-import Done from 'material-ui-icons/Done';
-import Error from 'material-ui-icons/Error';
+import NoFailureIcon from 'material-ui-icons/Done';
+import ErrorIcon from 'material-ui-icons/Error';
 import IconButton from 'material-ui/IconButton';
 import React from 'react';
 import VolumeOff from 'material-ui-icons/VolumeOff';
@@ -13,20 +13,16 @@ import {
     ListItemText,
 } from 'material-ui/List';
 
-const styleSheetError = createStyleSheet({
-    root: {
+const listItemStyleSheet = createStyleSheet({
+    errorIcon: {
         fill: red['600'],
     },
-});
-const styleSheetOk = createStyleSheet({
-    root: {
+    mutedIcon: {
+        fill: 'blue',
+    },
+    noFailureIcon: {
         fill: green['600'],
     },
-});
-const ErrorIcon = withStyles(styleSheetError)(Error);
-const NoFailureIcon = withStyles(styleSheetOk)(Done);
-
-const listItemStyleSheet = createStyleSheet({
     root: {
         '&:hover': {
             background: 'rgba(0,0,0,0.1)',
@@ -39,14 +35,15 @@ const StatusListItem = ({
                             id,
                             classes,
                             lastRetrieval,
+                            muted,
                             name,
                             onFavorited,
                             onMuted,
                             hasFailure,
                         }) => (
     <ListItem className={classes.root}>
-        {hasFailure && <ErrorIcon />}
-        {!hasFailure && <NoFailureIcon />}
+        {hasFailure && <ErrorIcon className={!muted && classes.errorIcon} />}
+        {!hasFailure && <NoFailureIcon className={classes.noFailureIcon} />}
         <ListItemText
             primary={name}
             secondary={`last updated ${lastRetrieval.format('MM/DD/YYYY hh:mm:ss')}`}
@@ -56,7 +53,7 @@ const StatusListItem = ({
                 aria-label="Mute"
                 onClick={(evt) => onMuted(id)}
             >
-                <VolumeOff />
+                <VolumeOff className={muted && classes.mutedIcon} />
             </IconButton>
             <IconButton
                 aria-label="Favorite"

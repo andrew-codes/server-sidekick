@@ -17,6 +17,7 @@ const StatusList = ({
                     id={build.instanceId}
                     key={index}
                     lastRetrieval={build.lastRetrieval}
+                    muted={build.muted}
                     name={build.name}
                     onFavorited={onFavorited}
                     onMuted={onMuted}
