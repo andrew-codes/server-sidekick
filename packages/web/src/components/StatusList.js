@@ -13,7 +13,8 @@ const StatusList = ({
         >
             {builds.map((build, index) => (
                 <StatusListItem
-                    hasFailure={build.severity === 3}
+                    failed={build.severity === 3}
+                    pending={build.severity === 6}
                     id={build.instanceId}
                     key={index}
                     lastRetrieval={build.lastRetrieval}
