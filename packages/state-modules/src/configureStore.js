@@ -26,7 +26,7 @@ export default function configureStore(initialState = {}, additionalMiddleware =
             store.replaceReducer(nextRootReducer);
         })
     }
-    websocketMiddleware.run(websocketSaga('ws://hackweek:5000/ws'));
+    websocketMiddleware.run(websocketSaga('ws://hackweek.dev.corp.versionone.net:5000/ws'));
     store.runSaga = sagaMiddleware.run;
     store.close = () => store.dispatch(END);
     return store;

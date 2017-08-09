@@ -10,7 +10,7 @@ export default (url) => {
         };
         ws.onerror = (error) => {
             console.log(`WebSocket error: ${error}`);
-            console.dir(error)
+            // console.dir(error)
         };
         ws.onmessage = (e) => {
             const data = JSON.parse(e.data);

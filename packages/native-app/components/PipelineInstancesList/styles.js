@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'; 
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   piList: {
@@ -7,5 +7,6 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 20,
   },
 });

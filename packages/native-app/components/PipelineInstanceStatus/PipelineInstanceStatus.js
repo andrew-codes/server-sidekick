@@ -11,13 +11,14 @@ export default class PipelineInstanceStatus extends React.Component {
             progress,
         } = this.props;
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>{label}</Text>
                 <Text>{lastRetrieval}</Text>
-                <Bar style={styles.item}
-                     progress={progress}
-                />
             </View>
         );
     }
 }
+
+// <Bar style={styles.item}
+//      progress={progress}
+// />
