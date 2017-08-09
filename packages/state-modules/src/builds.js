@@ -12,7 +12,7 @@ const MuteBuilds = 'MuteBuilds';
 const getRoot = (state) => state.builds;
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
 const getMutedBuildIds = createSelector(getRoot, root => root.muted || []);
-const getTwentyBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedIds) => Object.keys(root.entities)
+const getLatestTwentyBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedIds) => Object.keys(root.entities)
     .map(id => ({
         ...root.entities[id],
         lastRetrieval: moment(root.entities[id].lastRetrieval),
@@ -29,20 +29,21 @@ const getTwentyBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedId
         return 0;
     })
     .slice(0, 20));
-const getFilteredBuilds = createSelector(getTwentyBuilds, getTextFilterValue, (builds, textFilter) => {
+const getFilteredBuilds = createSelector(getLatestTwentyBuilds, getTextFilterValue, (builds, textFilter) => {
     if (!textFilter) {
         return builds;
     }
     const filter = textFilter.toLowerCase();
     return builds.filter(build => build.name.toLowerCase().indexOf(filter) >= 0);
 });
-const hasUnacknowledgedFailures = createSelector(getFilteredBuilds, getMutedBuildIds, (builds, mutedBuildIds) => builds.reduce((output, build) => (
-    output || (!build.muted && build.severity === 3)
-), false));
+const getFailedBuilds = createSelector(getFilteredBuilds, builds => builds.filter(build => build.severity === 3));
+const hasUnacknowledgedFailures = createSelector(getFailedBuilds, getMutedBuildIds, (builds, mutedBuildIds) => builds.filter(build => !build.muted).length > 0);
+const getUnNotifiedFailedBuilds = createSelector(getFailedBuilds, (failedBuilds) => failedBuilds.filter(build => build.notified !== undefined && !build.notified));
 export const selectors = {
-    getBuilds: getTwentyBuilds,
+    getBuilds: getLatestTwentyBuilds,
     getFilteredBuilds,
     hasUnacknowledgedFailures,
+    getUnNotifiedFailedBuilds,
 };
 
 // -- Action creators
@@ -84,6 +85,7 @@ export default handleActions({
                     [build.instanceId]: {
                         ...build,
                         lastRetrieval: lastRetrieval,
+                        notified: false,
                     },
                 }), {}),
         },

@@ -6,6 +6,7 @@ import ApplicationBar from './ApplicationBar';
 import BrowserTabFavicon from './BrowserTabFavicon';
 import Home from './containers/Home';
 import NotFound from './Router/NotFound';
+import Notify from './Notify';
 
 class App extends Component {
     componentDidMount() {
@@ -17,12 +18,14 @@ class App extends Component {
 
     render() {
         const {
+            unNotifiedBuilds,
             hasUnacknowledgedFailures,
         } = this.props;
         const faviconSrc = !hasUnacknowledgedFailures ? "/static/pass.ico" :"/static/fail.ico";
         return (
             <div>
                 <BrowserTabFavicon src={faviconSrc}/>
+                <Notify builds={unNotifiedBuilds} />
                 <ApplicationBar
                     title="Builds"
                     hasUnacknowledgedFailures={hasUnacknowledgedFailures}
@@ -42,5 +45,6 @@ class App extends Component {
 
 const stateToProps = (state) => ({
     hasUnacknowledgedFailures: builds.selectors.hasUnacknowledgedFailures(state),
+    unNotifiedBuilds: builds.selectors.getUnNotifiedFailedBuilds(state),
 });
 export default connect(stateToProps)(App);

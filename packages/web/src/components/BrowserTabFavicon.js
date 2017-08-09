@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 
 class BrowserTabFavicon extends Component {
-    constructor(...rest) {
-        super(...rest);
-        this.changeFavicon = this.changeFavicon.bind(this);
-    }
-
     shouldComponentUpdate(nextProps) {
         return nextProps.src !== this.props.src;
     }
+
     componentDidMount() {
         this.changeFavicon(this.props.src);
     }
@@ -17,7 +13,7 @@ class BrowserTabFavicon extends Component {
         this.changeFavicon(nextProps.src);
     }
 
-    changeFavicon(src) {
+    changeFavicon = (src) => {
         const head = document ? (document.head || document.getElementsByTagName('head')[0]) : null;
         if (!src || !document) {
             return;
@@ -31,7 +27,7 @@ class BrowserTabFavicon extends Component {
             head.removeChild(oldLink);
         }
         head.appendChild(link);
-    }
+    };
 
     render() {
         return null;
