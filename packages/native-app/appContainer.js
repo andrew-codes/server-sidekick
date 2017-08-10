@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {builds} from 'v1-status-state-modules';
 import {connect} from 'react-redux'
+import {View} from 'react-native';
+import Notify from './components/Notify';
 import PipelineInstancesList from './components/PipelineInstancesList/PipelineInstancesList';
 import PipelineDetails from './components/PipelineDetails/PipelineDetails';
 
@@ -29,11 +31,20 @@ class AppContainer extends Component {
 
     render() {
         return (
-            <PipelineInstancesList
-                pipelineInstances={this.props.pis}
-                navigator={this.props.navigator}
-                onSelectBuild={this.props.onSelectBuild}
-            />
+            <View
+                style={{
+                    flex: 1,
+                }}>
+                <Notify
+                    builds={this.props.unNotifiedBuilds}
+                    markNotified={this.props.markNotified}
+                />
+                <PipelineInstancesList
+                    pipelineInstances={this.props.pis}
+                    navigator={this.props.navigator}
+                    onSelectBuild={this.props.onSelectBuild}
+                />
+            </View>
         )
     }
 }
@@ -43,6 +54,7 @@ function mapStateToProps(state) {
         pis: builds.selectors.getFilteredBuilds(state),
         selectedBuild: builds.selectors.getSelected(state),
         isBuildDetailsRequestPending: builds.selectors.getIsBuildDetailsRequestPending(state),
+        unNotifiedBuilds: builds.selectors.getUnNotifiedFailedBuilds(state),
     };
 }
 
@@ -52,6 +64,7 @@ function dispatchToProps(dispatch) {
         selectBuild: bindActionCreators(builds.actions.creators.selectBuild, dispatch),
         fetchBuildDetails: bindActionCreators(builds.actions.creators.fetchBuildDetails, dispatch),
         onDeselectBuild: bindActionCreators(builds.actions.creators.deselectBuild, dispatch),
+        markNotified: bindActionCreators(builds.actions.creators.markNotified, dispatch),
     };
 }
 

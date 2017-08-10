@@ -12,6 +12,7 @@ export const getBuildsSeedState = (numberOfItems = 20) => fetch(`http://hackweek
                         [item.instanceId]: {
                             ...item,
                             lastRetrieval: (new Date()).toString(),
+                            notified: true,
                         },
                     }), {}),
             },
