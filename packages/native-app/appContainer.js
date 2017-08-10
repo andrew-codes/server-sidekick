@@ -22,11 +22,30 @@ class AppContainer extends Component {
           passProps: { ...build },
           onLeftButtonPress: this.props.onDeselectBuild,
           leftButtonTitle: "< Back",
+          barTintColor: this.getBarColor(build.severity),
+          tintColor: "#ffffff",
+          titleTextColor: "#ffffff",
         });
       }
       else if (this.props.selectedBuild && !nextProps.selectedBuild) {
         this.props.navigator.popToTop();
       }
+    }
+
+    getBarColor = (status) => {
+        switch (status) {
+          case "pending":
+          case 1:
+            return "#0019e0";
+          case "error":
+          case 3:
+            return "#b50200";
+          case "success":
+          case 2:
+            return "#066d31";
+          default:
+            return "#000000";
+        }
     }
 
     render() {

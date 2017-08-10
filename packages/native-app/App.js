@@ -55,13 +55,14 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <NavigatorIOS
-                    initialRoute={{
-                        component: AppContainer,
-                        title: 'Something Awesome',
-                    }}
-                    style={{flex: 1}}
-                />
+            <NavigatorIOS
+              initialRoute={{
+                component: AppContainer,
+                title: 'Something Awesome',
+                barTintColor: '#edeeef',
+              }}
+              style={{flex: 1}}
+            />
             </Provider>
         );
     }

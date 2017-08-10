@@ -27,6 +27,6 @@ const getIconFromStatus = (status) => {
       case 2:
         return require("../../images/ic_check_circle.png");
       default:
-        return require("../../images/ic_error.png");
+        return null;
     }
 }
