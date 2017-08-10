@@ -63,6 +63,6 @@ const stateToProps = (state) => ({
     unNotifiedBuilds: builds.selectors.getUnNotifiedFailedBuilds(state),
 });
 const dispatchToProps = (dispatch) => ({
-    markNotified: bindActionCreators(builds.actionCreators.markNotified, dispatch),
+    markNotified: bindActionCreators(builds.actions.creators.markNotified, dispatch),
 });
 export default connect(stateToProps, dispatchToProps)(withStyles(stylesheet)(App));

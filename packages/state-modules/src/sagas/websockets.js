@@ -14,7 +14,7 @@ export default (url) => {
         };
         ws.onmessage = (e) => {
             const data = JSON.parse(e.data);
-            dispatch(builds.actionCreators.addBuilds(data));
+            dispatch(builds.actions.creators.addBuilds(data));
             // return dispatch({type: 'TEST', data: e.data});
         };
 

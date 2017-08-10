@@ -79,11 +79,11 @@ const stateToProps = (state) => ({
     isBuildDetailsRequestPending: builds.selectors.getIsBuildDetailsRequestPending(state),
 });
 const dispatchToProps = (dispatch) => ({
-    onFilterValueChange: bindActionCreators(builds.actionCreators.applyTextFilter, dispatch),
-    onMuteBuilds: bindActionCreators(builds.actionCreators.muteBuilds, dispatch),
-    selectBuild: bindActionCreators(builds.actionCreators.selectBuild, dispatch),
-    fetchBuildDetails: bindActionCreators(builds.actionCreators.fetchBuildDetails, dispatch),
-    onDeselectBuild: bindActionCreators(builds.actionCreators.deselectBuild, dispatch),
+    onFilterValueChange: bindActionCreators(builds.actions.creators.applyTextFilter, dispatch),
+    onMuteBuilds: bindActionCreators(builds.actions.creators.muteBuilds, dispatch),
+    selectBuild: bindActionCreators(builds.actions.creators.selectBuild, dispatch),
+    fetchBuildDetails: bindActionCreators(builds.actions.creators.fetchBuildDetails, dispatch),
+    onDeselectBuild: bindActionCreators(builds.actions.creators.deselectBuild, dispatch),
 });
 const mergeProps = (stateProps, dispatchProps, props) => ({
     ...stateProps,
