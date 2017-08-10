@@ -31,13 +31,14 @@ function* fetchBuildDetails({payload: {id}}) {
 function* fetchBuilds({payload: {numberToFetch}}) {
     try {
         yield put({type: actions.FetchingPending, payload: {keys: []}});
-        const build = yield call(api.getBuildsSeedState, numberToFetch);
+        const initialState = yield call(api.getBuildsSeedState, numberToFetch);
         yield put({
             type: actions.AddBuilds, payload: {
-                builds: [{
-                    ...build,
-                    lastRetrieval: (new Date()).toString(),
-                }]
+                builds: Object.values(initialState.builds.entities)
+                    .map(b => ({
+                      ...b,
+                      lastRetrieval: (new Date()).toString(),
+                    })),
             }
         });
         yield put({type: actions.FetchingSuccess, payload: {keys: []}});

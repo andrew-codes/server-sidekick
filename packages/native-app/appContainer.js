@@ -27,7 +27,7 @@ function mapStateToProps(state) {
 
 function dispatchToProps(dispatch) {
     return {
-        fetchBuilds: bindActionCreators(builds.actionCreators.fetchBuilds, dispatch),
+        fetchBuilds: bindActionCreators(builds.actions.creators.fetchBuilds, dispatch),
     };
 }
 
