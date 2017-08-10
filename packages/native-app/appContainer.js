@@ -13,6 +13,7 @@ class AppContainer extends Component {
         return (
             <PipelineInstancesList
                 pipelineInstances={this.props.pis}
+                navigator={this.props.navigator}
             />
         )
     }
