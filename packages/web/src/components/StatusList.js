@@ -6,6 +6,7 @@ const StatusList = ({
                         builds,
                         onFavorited,
                         onMuted,
+                        onSelected,
                         title,
                     }) => (
         <List
@@ -19,9 +20,10 @@ const StatusList = ({
                     key={index}
                     lastRetrieval={build.lastRetrieval}
                     muted={build.muted}
-                    name={`${build.name} - ${build.pipelineName}`}
+                    name={`${build.name}: ${build.pipelineName}`}
                     onFavorited={onFavorited}
                     onMuted={onMuted}
+                    onSelected={onSelected}
                 />
             ))
             }

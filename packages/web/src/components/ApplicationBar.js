@@ -14,20 +14,14 @@ const styleSheet = createStyleSheet({
 });
 
 const ApplicationBar = ({
-                            hasUnacknowledgedFailures,
+                            failed,
                             title,
                         }) => (
     <AppBar
-        color={hasUnacknowledgedFailures ? 'accent' : 'primary'}
+        color={failed ? 'accent' : 'primary'}
         position="fixed"
     >
         <Toolbar>
-            <IconButton
-                aria-label="Menu"
-                color="contrast"
-            >
-                <MenuIcon />
-            </IconButton>
             <Typography
                 color="inherit"
                 type="title"

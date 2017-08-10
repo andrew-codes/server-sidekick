@@ -41,7 +41,7 @@ class App extends Component {
                 />
                 <ApplicationBar
                     title="Builds"
-                    hasUnacknowledgedFailures={hasUnacknowledgedFailures}
+                    failed={hasUnacknowledgedFailures}
                 />
                 <div className={classes.body}>
                     <Switch>

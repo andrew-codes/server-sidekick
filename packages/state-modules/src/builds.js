@@ -1,19 +1,33 @@
 import moment from 'moment';
+import {call, put, takeEvery} from 'redux-saga/effects';
 import {createSelector} from 'reselect';
 import {createActions, handleActions} from 'redux-actions';
-import {getBuildsSeedState} from 'v1-status-js-api';
+import * as api from 'v1-status-js-api';
 
 const ApplyTextFilterAction = 'ApplyTextFilter';
 const AddBuilds = 'AddBuilds';
-const FetchBuildsSuccess = 'FetchBuilds-Success';
+const FetchingPending = 'FetchingPending';
+const FetchingSuccess = 'FetchingSuccess';
+const FetchBuilds = 'FetchBuilds';
+const FetchBuildDetails = 'FetchBuildDetails';
 const MuteBuilds = 'MuteBuilds';
 const MarkNotified = 'MarkNotified';
+const SelectBuild = 'SelectBuild';
+const DeselectBuild = 'DeselectBuild';
 
 // -- Selectors
 const getRoot = (state) => state.builds;
+const getIsBuildDetailsRequestPending = createSelector(getRoot, root => (root.pendingRequests || []).indexOf(root.selected) >= 0);
 const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
 const getMutedBuildIds = createSelector(getRoot, root => root.muted || []);
-const getLatestTwentyBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedIds) => Object.keys(root.entities)
+const getSelected = createSelector(getRoot, root => root.selected
+    ? ({
+        ...root.entities[root.selected],
+        lastRetrieval: moment(root.entities[root.selected].lastRetrieval),
+    })
+    : null
+);
+const getBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedIds) => Object.keys(root.entities)
     .map(id => ({
         ...root.entities[id],
         lastRetrieval: moment(root.entities[id].lastRetrieval),
@@ -29,7 +43,8 @@ const getLatestTwentyBuilds = createSelector(getRoot, getMutedBuildIds, (root, m
         }
         return 0;
     })
-    .slice(0, 20));
+);
+const getLatestTwentyBuilds = createSelector(getBuilds, builds => builds.slice(0, 20));
 const getFilteredBuilds = createSelector(getLatestTwentyBuilds, getTextFilterValue, (builds, textFilter) => {
     if (!textFilter) {
         return builds;
@@ -40,33 +55,74 @@ const getFilteredBuilds = createSelector(getLatestTwentyBuilds, getTextFilterVal
 const getFailedBuilds = createSelector(getFilteredBuilds, builds => builds.filter(build => build.severity === 3));
 const hasUnacknowledgedFailures = createSelector(getFailedBuilds, getMutedBuildIds, (builds, mutedBuildIds) => builds.filter(build => !build.muted).length > 0);
 const getUnNotifiedFailedBuilds = createSelector(getFailedBuilds, (failedBuilds) => failedBuilds.filter(build => build.notified !== undefined && !build.notified));
+
 export const selectors = {
     getBuilds: getLatestTwentyBuilds,
     getFilteredBuilds,
+    getSelected,
     hasUnacknowledgedFailures,
     getUnNotifiedFailedBuilds,
+    getIsBuildDetailsRequestPending,
 };
 
 // -- Action creators
-const creators = createActions({
+export const actionCreators = createActions({
     [ApplyTextFilterAction]: value => ({value}),
-    [AddBuilds]: (builds = [], lastRetrieval = (new Date()).toString()) => ({builds, lastRetrieval}),
+    [AddBuilds]: (builds = []) => ({builds}),
     [MuteBuilds]: ids => ({ids}),
     [MarkNotified]: ids => ({ids}),
+    [SelectBuild]: id => ({id}),
+    [DeselectBuild]: () => null,
+    [FetchBuildDetails]: (id) => ({id}),
+    [FetchBuilds]: (numberToFetch) => ({numberToFetch}),
 });
-const fetchBuilds = (numberToFetch = 20) => (dispatch) => {
-    getBuildsSeedState(numberToFetch)
-        .then(data => {
-            dispatch({
-                type: FetchBuildsSuccess,
-                payload: data,
-            });
+
+// Sagas
+function* fetchBuildDetails({payload: {id}}) {
+    try {
+        yield put({type: FetchingPending, payload: {keys: [id]}});
+        const build = yield call(api.fetchBuildDetails, id);
+        yield put({
+            type: AddBuilds, payload: {
+                builds: [{
+                    ...build,
+                    instanceId: id,
+                    notified: true,
+                }],
+            },
         });
-};
-export const actionCreators = {
-    ...creators,
-    fetchBuilds,
-};
+        yield put({type: FetchingSuccess, payload: {keys: [id]}});
+    } catch (e) {
+        console.log(e);
+        // we should handle errors in the UI
+        //yield put({type: "USER_FETCH_FAILED", message: e.message});
+    }
+}
+
+function* fetchBuilds({payload: {numberToFetch}}) {
+    try {
+        yield put({type: FetchingPending, payload: {keys: []}});
+        const build = yield call(api.getBuildsSeedState, numberToFetch);
+        yield put({
+            type: AddBuilds, payload: {
+                builds: [{
+                    ...build,
+                    lastRetrieval: (new Date()).toString(),
+                }]
+            }
+        });
+        yield put({type: FetchingSuccess, payload: {keys: []}});
+    } catch (e) {
+        console.log(e);
+        // we should handle errors in the UI
+        //yield put({type: "USER_FETCH_FAILED", message: e.message});
+    }
+}
+
+export const sagas = [
+    () => takeEvery(FetchBuildDetails, fetchBuildDetails),
+    () => takeEvery(FetchBuilds, fetchBuilds),
+];
 
 // -- Reducer
 const defaultState = {
@@ -85,18 +141,11 @@ export default handleActions({
                 .reduce((output, build) => ({
                     ...output,
                     [build.instanceId]: {
-                        ...build,
-                        lastRetrieval: lastRetrieval,
                         notified: false,
+                        ...state.entities[build.instanceId],
+                        ...build,
                     },
                 }), {}),
-        },
-    }),
-    [FetchBuildsSuccess]: (state, {payload: {builds: {entities}}}) => ({
-        ...state,
-        entities: {
-            ...state.entities,
-            ...entities,
         },
     }),
     [MuteBuilds]: (state, {payload: {ids}}) => ({
@@ -118,6 +167,24 @@ export default handleActions({
                     }
                 }), {})
         }
-    })
-
+    }),
+    [SelectBuild]: (state, {payload: {id}}) => ({
+        ...state,
+        selected: id,
+    }),
+    [DeselectBuild]: (state, action) => ({
+        ...state,
+        selected: null,
+    }),
+    [FetchingPending]: (state, {payload: {keys}}) => ({
+        ...state,
+        pendingRequests: (state.pendingRequests || [])
+            .filter(requestKey => keys.indexOf(requestKey) < 0)
+            .concat(keys)
+    }),
+    [FetchingSuccess]: (state, {payload: {keys}}) => ({
+        ...state,
+        pendingRequests: (state.pendingRequests || [])
+            .filter(requestKey => keys.indexOf(requestKey) < 0)
+    }),
 }, defaultState);

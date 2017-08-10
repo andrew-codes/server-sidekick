@@ -43,10 +43,14 @@ const StatusListItem = ({
                             name,
                             onFavorited,
                             onMuted,
+                            onSelected,
                             pending,
                             failed,
                         }) => (
-    <ListItem className={classes.root}>
+    <ListItem
+        className={classes.root}
+        onClick={(e) => onSelected(id)}
+    >
         {failed && <ErrorIcon className={!muted ? classes.errorIcon : ''} />}
         {pending && <PendingIcon className={classes.pending} />}
         {!failed && !pending && <NoFailureIcon className={classes.noFailureIcon} />}

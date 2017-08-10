@@ -6,7 +6,7 @@ import {BrowserRouter} from 'react-router-dom';
 import {createMuiTheme, MuiThemeProvider} from 'material-ui/styles';
 import {green, red} from 'material-ui/colors';
 import {Provider} from 'react-redux';
-import {hydrate} from 'react-dom';
+import {render} from 'react-dom';
 import configureStore from '../configureStore';
 
 const renderApp = (store) => {
@@ -19,7 +19,7 @@ const renderApp = (store) => {
         }),
     });
 
-    hydrate((
+    render((
         <AppContainer>
             <Provider store={store}>
                 <BrowserRouter>

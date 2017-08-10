@@ -3,6 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import {createStore, applyMiddleware, compose} from 'redux';
 import reducer from './reducer';
 import websocketSaga from './sagas/websockets';
+import sagas from './sagas';
 
 export default function configureStore(initialState = {}, additionalMiddleware = [], composeFunc = compose) {
     const sagaMiddleware = createSagaMiddleware();
@@ -27,6 +28,7 @@ export default function configureStore(initialState = {}, additionalMiddleware =
         })
     }
     websocketMiddleware.run(websocketSaga('ws://hackweek.dev.corp.versionone.net:5000/ws'));
+    sagaMiddleware.run(sagas);
     store.runSaga = sagaMiddleware.run;
     store.close = () => store.dispatch(END);
     return store;
