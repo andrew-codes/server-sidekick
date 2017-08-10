@@ -3,15 +3,10 @@ import {Bar} from 'react-native-progress';
 import {Text, View, TouchableHighlight} from 'react-native';
 import StatusIcon from '../StatusIcon/StatusIcon';
 import styles from './styles';
-import PipelineDetails from '../PipelineDetails/PipelineDetails';
 
 export default class PipelineInstanceStatus extends React.Component {
     onPress = () => {
-      this.props.navigator.push({
-        component: PipelineDetails,
-        title: `Details for ${this.props.label}`,
-        passProps: { myProp: 'genius' },
-      });
+      this.props.onSelectBuild(this.props.piid)
     }
 
     render() {

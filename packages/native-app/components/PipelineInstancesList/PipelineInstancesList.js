@@ -6,7 +6,7 @@ import styles from './styles';
 
 export default class PipelineInstancesList extends React.Component {
     render() {
-        const {pipelineInstances} = this.props;
+        const {pipelineInstances, onSelectBuild} = this.props;
         return (
             <View style={styles.piList}>
                 <FlatList
@@ -19,6 +19,8 @@ export default class PipelineInstancesList extends React.Component {
                             progress={item.progress}
                             status={item.severity}
                             navigator={this.props.navigator}
+                            onSelectBuild={onSelectBuild}
+                            piid={item.instanceId}
                         />
                     )}
                 />
