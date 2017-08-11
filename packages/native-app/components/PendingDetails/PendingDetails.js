@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Button} from 'react-native';
+import {Text, View, Button, TextInput} from 'react-native';
 import styles from './styles';
 
 const PendingDetails = (props) => {
@@ -23,16 +23,27 @@ const PendingDetails = (props) => {
           <Text style={styles.pendingDetails}>{title}</Text>
           <Text style={styles.pendingDetails}>{question}</Text>
         </View>
-        <Button
-          onPress={() => {console.log("kevin is best kevin")}}
-          title="Approve"
-          color="#09a84c"
-        />
-        <Button
-          onPress={() => {console.log("kevin is best kevin")}}
-          title="Deny"
-          color="#d52101"
-        />
+        <TextInput
+        style={styles.reasonBox}
+        multiline={true}
+        placeholder={'Reason'}
+        placeholderTextColor={'grey'}
+      />
+        <View style={styles.buttonContainer}>
+          <Button
+            onPress={() => {console.log("kevin is best kevin")}}
+            title="Deny"
+            color="#d52101"
+            style={{flex: 1}}
+          />
+          <Text style={{flex: 1}}></Text>
+          <Button
+            onPress={() => {console.log("kevin is best kevin")}}
+            title="Approve"
+            color="#09a84c"
+            style={{flex: 1}}
+          />
+        </View>
       </View>
     )
 }
