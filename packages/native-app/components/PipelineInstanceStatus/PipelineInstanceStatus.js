@@ -1,5 +1,4 @@
 import React from 'react';
-import {Bar} from 'react-native-progress';
 import {Text, View, TouchableHighlight} from 'react-native';
 import StatusIcon from '../StatusIcon/StatusIcon';
 import styles from './styles';
@@ -40,7 +39,3 @@ export default class PipelineInstanceStatus extends React.Component {
         );
     }
 }
-
-// <Bar style={styles.item}
-//      progress={progress}
-// />

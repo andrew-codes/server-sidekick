@@ -13,16 +13,17 @@ class AppContainer extends Component {
     }
 
     componentWillUpdate(nextProps) {
-      if (this.props.isBuildDetailsRequestPending && !nextProps.isBuildDetailsRequestPending)
+      if (nextProps.selectedBuild)
       {
         const build = nextProps.selectedBuild
+        const color = this.getSeverityColor(build.severity)
         this.props.navigator.push({
           component: PipelineDetails,
-          title: `${build.pipelineName} ${build.group} ${build.project}`,
-          passProps: { ...build },
+          title: 'Pipeline Details',
+          passProps: { ...build, color },
           onLeftButtonPress: this.props.onDeselectBuild,
           leftButtonTitle: "< Back",
-          barTintColor: this.getBarColor(build.severity),
+          barTintColor: color,
           tintColor: "#ffffff",
           titleTextColor: "#ffffff",
         });
@@ -32,18 +33,18 @@ class AppContainer extends Component {
       }
     }
 
-    getBarColor = (status) => {
+    getSeverityColor = (status) => {
         switch (status) {
           case "pending":
           case 1:
           case 6:
-            return "#0019e0";
+            return "#005293";
           case "error":
           case 3:
-            return "#b50200";
+            return "#d52101";
           case "success":
           case 2:
-            return "#066d31";
+            return "#09a84c";
           case "canceled":
           case 4:
             return "grey";
