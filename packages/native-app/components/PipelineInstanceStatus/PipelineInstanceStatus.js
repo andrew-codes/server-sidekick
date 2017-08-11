@@ -2,18 +2,16 @@ import React from 'react';
 import {Text, View, TouchableHighlight} from 'react-native';
 import StatusIcon from '../StatusIcon/StatusIcon';
 import styles from './styles';
-const PushNotification = require('react-native-push-notification');
 
 export default class PipelineInstanceStatus extends React.Component {
     onPress = () => {
       this.props.onSelectBuild(this.props.piid)
-    }
+    };
 
     render() {
         const {
             label,
             lastRetrieval,
-            progress,
             status
         } = this.props;
         return (

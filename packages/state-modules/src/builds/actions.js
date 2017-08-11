@@ -10,7 +10,7 @@ export const MuteBuilds = 'muteBuilds';
 export const MarkNotified = 'markNotified';
 export const SelectBuild = 'selectBuild';
 export const DeselectBuild = 'deselectBuild';
-export const ManualActionOverride = 'ManualActionOverride';
+export const OverrideManualAction = 'OverrideManualAction';
 
 export const creators = createActions({
     [ApplyTextFilter]: value => ({value}),
@@ -21,5 +21,5 @@ export const creators = createActions({
     [DeselectBuild]: () => null,
     [FetchBuildDetails]: (id) => ({id}),
     [FetchBuilds]: (numberToFetch) => ({numberToFetch}),
-    [ManualActionOverride]: (build, shouldOverride) => ({...build, shouldOverride}),
+    [OverrideManualAction]: (build, shouldOverride) => ({...build, shouldOverride}),
 });

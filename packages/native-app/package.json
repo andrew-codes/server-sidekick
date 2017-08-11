@@ -16,7 +16,7 @@
     "ios": "react-native run-ios",
     "prepublish": "",
     "test": "{ cd ../../; npm run test/single v1-mobile; };",
-    "haul": "haul start"
+    "haul": "haul start --platform ios"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",

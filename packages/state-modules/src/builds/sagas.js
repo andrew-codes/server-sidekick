@@ -5,7 +5,7 @@ import * as actions from './actions';
 export default [
     () => takeEvery(actions.FetchBuildDetails, fetchBuildDetails),
     () => takeEvery(actions.FetchBuilds, fetchBuilds),
-    () => takeEvery(actions.ManualActionOverride, overrideTheManualAction),
+    () => takeEvery(actions.OverrideManualAction, overrideTheManualAction),
 ];
 
 function* fetchBuildDetails({payload: {id}}) {
@@ -53,7 +53,7 @@ function* fetchBuilds({payload: {numberToFetch}}) {
 function* overrideTheManualAction({payload: {instanceId, pending: {outputKey}, phase, shouldOverride, stage, status, stepIndex}}) {
     try {
         yield put({type: actions.FetchingPending, payload: {keys: [instanceId]}});
-        yield call(api.manualActionOverride, {instanceId, outputKey, phase, stage, status, stepIndex}, shouldOverride);
+        yield call(api.overrideManualAction, {instanceId, outputKey, phase, stage, status, stepIndex}, shouldOverride);
         yield put({type: actions.FetchingSuccess, payload: {keys: [instanceId]}});
     }
     catch(e) {

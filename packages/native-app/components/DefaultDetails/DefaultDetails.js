@@ -4,16 +4,18 @@ import styles from './styles';
 
 const DefaultDetails = (props) => {
     const {
-      totalSteps,
-      totalSuccess,
-      totalSkipped
+        build: {
+            totalSteps,
+            totalSuccess,
+            totalSkipped
+        }
     } = props;
     return (
-      <View>
-        <Text style={styles.details}>Total Skipped Steps: {totalSkipped}</Text>
-        <Text style={styles.details}>Total Successful Steps: {totalSuccess}</Text>
-        <Text style={styles.details}>Total Steps: {totalSteps}</Text>
-      </View>
+        <View>
+            <Text style={styles.details}>Total Skipped Steps: {totalSkipped}</Text>
+            <Text style={styles.details}>Total Successful Steps: {totalSuccess}</Text>
+            <Text style={styles.details}>Total Steps: {totalSteps}</Text>
+        </View>
     )
 }
 

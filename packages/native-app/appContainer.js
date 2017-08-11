@@ -13,45 +13,51 @@ class AppContainer extends Component {
     }
 
     componentWillUpdate(nextProps) {
-      if (this.props.isBuildDetailsRequestPending && !nextProps.isBuildDetailsRequestPending)
-      {
-        const build = nextProps.selectedBuild
-        const color = this.getSeverityColor(build.severity)
-        this.props.navigator.push({
-          component: PipelineDetails,
-          title: 'Pipeline Details',
-          passProps: { ...build, color },
-          onLeftButtonPress: this.props.onDeselectBuild,
-          leftButtonTitle: "< Back",
-          barTintColor: color,
-          tintColor: "#ffffff",
-          titleTextColor: "#ffffff",
-        });
-      }
-      else if (this.props.selectedBuild && !nextProps.selectedBuild) {
-        this.props.navigator.popToTop();
-      }
+        if (this.props.isBuildDetailsRequestPending && !nextProps.isBuildDetailsRequestPending) {
+            const {
+                overrideManualAction,
+            } = this.props;
+            const build = nextProps.selectedBuild;
+            const color = this.getSeverityColor(build.severity);
+            this.props.navigator.push({
+                component: PipelineDetails,
+                title: 'Pipeline Details',
+                passProps: {
+                    build,
+                    color,
+                    onOverrideManualAction: overrideManualAction,
+                },
+                onLeftButtonPress: this.props.onDeselectBuild,
+                leftButtonTitle: "< Back",
+                barTintColor: color,
+                tintColor: "#ffffff",
+                titleTextColor: "#ffffff",
+            });
+        }
+        else if (this.props.selectedBuild && !nextProps.selectedBuild) {
+            this.props.navigator.popToTop();
+        }
     }
 
     getSeverityColor = (status) => {
         switch (status) {
-          case "pending":
-          case 1:
-          case 6:
-            return "#005293";
-          case "error":
-          case 3:
-            return "#d52101";
-          case "success":
-          case 2:
-            return "#09a84c";
-          case "canceled":
-          case 4:
-            return "grey";
-          default:
-            return "#000000";
+            case "pending":
+            case 1:
+            case 6:
+                return "#005293";
+            case "error":
+            case 3:
+                return "#d52101";
+            case "success":
+            case 2:
+                return "#09a84c";
+            case "canceled":
+            case 4:
+                return "grey";
+            default:
+                return "#000000";
         }
-    }
+    };
 
     render() {
         return (
@@ -64,8 +70,8 @@ class AppContainer extends Component {
                     markNotified={this.props.markNotified}
                 />
                 <PipelineInstancesList
-                    pipelineInstances={this.props.pis}
                     navigator={this.props.navigator}
+                    pipelineInstances={this.props.pis}
                     onSelectBuild={this.props.onSelectBuild}
                 />
             </View>
@@ -89,6 +95,7 @@ function dispatchToProps(dispatch) {
         fetchBuildDetails: bindActionCreators(builds.actions.creators.fetchBuildDetails, dispatch),
         onDeselectBuild: bindActionCreators(builds.actions.creators.deselectBuild, dispatch),
         markNotified: bindActionCreators(builds.actions.creators.markNotified, dispatch),
+        overrideManualAction: bindActionCreators(builds.actions.creators.overrideManualAction, dispatch),
     };
 }
 
