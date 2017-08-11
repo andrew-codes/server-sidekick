@@ -13,7 +13,7 @@ class AppContainer extends Component {
     }
 
     componentWillUpdate(nextProps) {
-      if (!this.props.selectedBuild && nextProps.selectedBuild)
+      if (this.props.isBuildDetailsRequestPending && !nextProps.isBuildDetailsRequestPending)
       {
         const build = nextProps.selectedBuild
         this.props.navigator.push({
@@ -36,6 +36,7 @@ class AppContainer extends Component {
         switch (status) {
           case "pending":
           case 1:
+          case 6:
             return "#0019e0";
           case "error":
           case 3:
@@ -43,6 +44,9 @@ class AppContainer extends Component {
           case "success":
           case 2:
             return "#066d31";
+          case "canceled":
+          case 4:
+            return "grey";
           default:
             return "#000000";
         }
