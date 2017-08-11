@@ -13,7 +13,7 @@ class AppContainer extends Component {
     }
 
     componentWillUpdate(nextProps) {
-      if (nextProps.selectedBuild)
+      if (this.props.isBuildDetailsRequestPending && !nextProps.isBuildDetailsRequestPending)
       {
         const build = nextProps.selectedBuild
         const color = this.getSeverityColor(build.severity)
