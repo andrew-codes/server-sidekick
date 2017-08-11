@@ -4,13 +4,15 @@ import styles from './styles';
 import {Bar} from 'react-native-progress';
 import DefaultDetails from '../DefaultDetails/DefaultDetails'
 import FailedDetails from '../FailedDetails/FailedDetails'
+import PendingDetails from '../PendingDetails/PendingDetails'
 
 export default class PipelineDetails extends Component {
     getDetailComponent = (status) => {
         switch (status) {
           case "pending":
-          case 1:
           case 6:
+            return PendingDetails;
+          case 1:
             return DefaultDetails;
           case "error":
           case 3:
