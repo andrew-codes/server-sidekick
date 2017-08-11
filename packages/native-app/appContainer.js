@@ -13,51 +13,33 @@ class AppContainer extends Component {
     }
 
     componentWillUpdate(nextProps) {
-        if (this.props.isBuildDetailsRequestPending && !nextProps.isBuildDetailsRequestPending) {
+        if (!this.props.selectedBuild && nextProps.selectedBuild) {
             const {
+                navigator,
+                onDeselectBuild,
                 overrideManualAction,
-            } = this.props;
-            const build = nextProps.selectedBuild;
-            const color = this.getSeverityColor(build.severity);
-            this.props.navigator.push({
+                selectedBuild,
+            } = nextProps;
+            const color = getSeverityColor(selectedBuild.severity);
+            navigator.push({
                 component: PipelineDetails,
                 title: 'Pipeline Details',
                 passProps: {
-                    build,
-                    color,
+                    progressColor: color,
                     onOverrideManualAction: overrideManualAction,
+                    navigator,
                 },
-                onLeftButtonPress: this.props.onDeselectBuild,
+                onLeftButtonPress: () => {
+                    onDeselectBuild();
+                    navigator.popToTop();
+                },
                 leftButtonTitle: "< Back",
                 barTintColor: color,
                 tintColor: "#ffffff",
                 titleTextColor: "#ffffff",
             });
         }
-        else if (this.props.selectedBuild && !nextProps.selectedBuild) {
-            this.props.navigator.popToTop();
-        }
     }
-
-    getSeverityColor = (status) => {
-        switch (status) {
-            case "pending":
-            case 1:
-            case 6:
-                return "#005293";
-            case "error":
-            case 3:
-                return "#d52101";
-            case "success":
-            case 2:
-                return "#09a84c";
-            case "canceled":
-            case 4:
-                return "grey";
-            default:
-                return "#000000";
-        }
-    };
 
     render() {
         return (
@@ -83,7 +65,6 @@ function mapStateToProps(state) {
     return {
         pis: builds.selectors.getFilteredBuilds(state),
         selectedBuild: builds.selectors.getSelected(state),
-        isBuildDetailsRequestPending: builds.selectors.getIsBuildDetailsRequestPending(state),
         unNotifiedBuilds: builds.selectors.getUnNotifiedFailedBuilds(state),
     };
 }
@@ -97,6 +78,26 @@ function dispatchToProps(dispatch) {
         markNotified: bindActionCreators(builds.actions.creators.markNotified, dispatch),
         overrideManualAction: bindActionCreators(builds.actions.creators.overrideManualAction, dispatch),
     };
+}
+
+function getSeverityColor(status) {
+    switch (status) {
+        case "pending":
+        case 1:
+        case 6:
+            return "#005293";
+        case "error":
+        case 3:
+            return "#d52101";
+        case "success":
+        case 2:
+            return "#09a84c";
+        case "canceled":
+        case 4:
+            return "grey";
+        default:
+            return "#000000";
+    }
 }
 
 const mergeProps = (stateProps, dispatchProps, props) => ({
