@@ -9,7 +9,6 @@ import {createStyleSheet, withStyles} from 'material-ui/styles';
 import BuildDetails from './../BuildDetails';
 import StatusList from '../StatusList';
 import TextFilter from './../TextFilter';
-import {fetchBuildDetails} from '../../../../js-api/src/index';
 
 const styleSheet = createStyleSheet(theme => ({
     root: theme.mixins.gutters({
@@ -27,6 +26,7 @@ const Home = ({
                   isBuildDetailsRequestPending,
                   onDeselectBuild,
                   onFilterValueChange,
+                  onManualActionOverride,
                   onMuteBuilds,
                   onSelectBuild,
                   selectedBuild,
@@ -66,6 +66,7 @@ const Home = ({
             >
                 <BuildDetails
                     build={selectedBuild}
+                    onManualActionOverride={shouldOverride => onManualActionOverride(selectedBuild, shouldOverride)}
                     pending={isBuildDetailsRequestPending}
                 />
             </Drawer>
@@ -73,17 +74,21 @@ const Home = ({
     </div>
 );
 
-const stateToProps = (state) => ({
-    builds: builds.selectors.getFilteredBuilds(state),
-    selectedBuild: builds.selectors.getSelected(state),
-    isBuildDetailsRequestPending: builds.selectors.getIsBuildDetailsRequestPending(state),
-});
+const stateToProps = (state) => {
+    console.log('selected build', builds.selectors.getSelected(state));
+    return ({
+        builds: builds.selectors.getFilteredBuilds(state),
+        selectedBuild: builds.selectors.getSelected(state),
+        isBuildDetailsRequestPending: builds.selectors.getIsBuildDetailsRequestPending(state),
+    });
+};
 const dispatchToProps = (dispatch) => ({
     onFilterValueChange: bindActionCreators(builds.actions.creators.applyTextFilter, dispatch),
     onMuteBuilds: bindActionCreators(builds.actions.creators.muteBuilds, dispatch),
     selectBuild: bindActionCreators(builds.actions.creators.selectBuild, dispatch),
     fetchBuildDetails: bindActionCreators(builds.actions.creators.fetchBuildDetails, dispatch),
     onDeselectBuild: bindActionCreators(builds.actions.creators.deselectBuild, dispatch),
+    onManualActionOverride: bindActionCreators(builds.actions.creators.manualActionOverride, dispatch)
 });
 const mergeProps = (stateProps, dispatchProps, props) => ({
     ...stateProps,

@@ -21,3 +21,15 @@ export const getBuildsSeedState = (numberOfItems = 20) => fetch(`http://hackweek
 
 export const fetchBuildDetails = (instanceId) => fetch(`http://hackweek.dev.corp.versionone.net:5000/api/Status/pipelineInstance/${encodeURIComponent(instanceId)}`)
     .then(response => response.json());
+
+export const manualActionOverride = (build, shouldOverride) => fetch(`http://hackweek.dev.corp.versionone.net:5000/api/Status/pipelineInstance/${encodeURIComponent(build.instanceId)}/${encodeURIComponent(build.phase)}/${encodeURIComponent(build.stage)}/${encodeURIComponent(build.stepIndex)}`, {
+        body: JSON.stringify({
+            outputKey: build.outputKey,
+            confirm: shouldOverride ? "True" : "False",
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+    })
+;

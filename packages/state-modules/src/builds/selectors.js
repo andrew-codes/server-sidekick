@@ -6,13 +6,6 @@ export const getRoot = (state) => state.builds;
 export const getIsBuildDetailsRequestPending = createSelector(getRoot, root => (root.pendingRequests || []).indexOf(root.selected) >= 0);
 export const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
 export const getMutedBuildIds = createSelector(getRoot, root => root.muted || []);
-export const getSelected = createSelector(getRoot, root => root.selected
-    ? ({
-        ...root.entities[root.selected],
-        lastRetrieval: moment(root.entities[root.selected].lastRetrieval),
-    })
-    : null
-);
 export const getBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedIds) => Object.keys(root.entities)
     .map(id => ({
         ...root.entities[id],
@@ -29,6 +22,13 @@ export const getBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedI
         }
         return 0;
     })
+);
+export const getSelected = createSelector(getRoot, getBuilds, (root, builds) => root.selected
+    ? ({
+        ...root.entities[root.selected],
+        lastRetrieval: moment(root.entities[root.selected].lastRetrieval),
+    })
+    : null
 );
 export const getLatestTwentyBuilds = createSelector(getBuilds, builds => builds.slice(0, 20));
 export const getFilteredBuilds = createSelector(getLatestTwentyBuilds, getTextFilterValue, (builds, textFilter) => {

@@ -1,3 +1,4 @@
+import Button from 'material-ui/Button';
 import React from 'react';
 import RefreshIcon from 'material-ui-icons/Refresh';
 import Typography from 'material-ui/Typography';
@@ -5,7 +6,7 @@ import {createStyleSheet, withStyles} from 'material-ui/styles';
 import {grey} from 'material-ui/colors';
 import ApplicationBar from './ApplicationBar';
 
-const stylesheet = createStyleSheet({
+const stylesheet = createStyleSheet(theme => ({
     '@keyframes spin': {
         from: {
             transform: 'rotate(0deg)',
@@ -13,6 +14,9 @@ const stylesheet = createStyleSheet({
         to: {
             transform: 'rotate(360deg)',
         },
+    },
+    button: {
+        margin: theme.spacing.unit,
     },
     content: {
         display: 'flex',
@@ -28,12 +32,13 @@ const stylesheet = createStyleSheet({
         height: '120px',
         width: '120px',
     },
-});
+}));
 
 const BuildDetails = ({
                           build,
-                          pending,
                           classes,
+                          onManualActionOverride,
+                          pending,
                       }) => (
     <div>
         <ApplicationBar
@@ -44,10 +49,39 @@ const BuildDetails = ({
             {pending && <RefreshIcon className={classes.refreshIcon} />}
             {!pending && (
                 <div>
+                    <div>Instance ID: <span>{build.instanceId}</span></div>
                     <div>Phase: <span>{build.phase}</span></div>
                     <div>Stage: <span>{build.stage}</span></div>
-                    <div>Progress: <span>{(100*build.stepIndex/build.totalSteps)}%</span></div>
-                    <div>All data available: <span>{JSON.stringify(build)}</span></div>
+                    <div>Progress: <span>{(100 * build.stepIndex / build.totalSteps)}%</span></div>
+                    {Boolean(build.pending) && (
+                        <div>
+                            <Typography component="h3">
+                                Pending
+                            </Typography>
+                            <Typography component="h4">
+                                {build.pending.title}
+                            </Typography>
+                            <Typography component="p">
+                                {build.pending.question}
+                            </Typography>
+                            <Button
+                                className={classes.button}
+                                color="primary"
+                                onClick={() => onManualActionOverride(true)}
+                                raised
+                            >
+                                Yes
+                            </Button>
+                            <Button
+                                className={classes.button}
+                                color="accent"
+                                onClick={() => onManualActionOverride(false)}
+                                raised
+                            >
+                                No
+                            </Button>
+                        </div>
+                    )}
                 </div>
             )}
         </div>
