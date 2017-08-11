@@ -11,10 +11,17 @@ export const MarkNotified = 'markNotified';
 export const SelectBuild = 'selectBuild';
 export const DeselectBuild = 'deselectBuild';
 export const OverrideManualAction = 'OverrideManualAction';
+export const ContinueBuild = 'ContinueBuild';
 
 export const creators = createActions({
     [ApplyTextFilter]: value => ({value}),
-    [AddBuilds]: (builds = []) => ({builds}),
+    [AddBuilds]: (builds = []) => ({
+        builds: builds.map(b => ({
+            ...b,
+            lastRetrieval: (new Date()).toString(),
+        }))
+    }),
+    [ContinueBuild]: id => ({id}),
     [MuteBuilds]: ids => ({ids}),
     [MarkNotified]: ids => ({ids}),
     [SelectBuild]: id => ({id}),

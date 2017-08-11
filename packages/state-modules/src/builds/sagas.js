@@ -36,10 +36,6 @@ function* fetchBuilds({payload: {numberToFetch}}) {
         yield put({
             type: actions.AddBuilds, payload: {
                 builds: Object.values(initialState.builds.entities)
-                    .map(b => ({
-                      ...b,
-                      lastRetrieval: (new Date()).toString(),
-                    })),
             }
         });
         yield put({type: actions.FetchingSuccess, payload: {keys: []}});
@@ -55,8 +51,9 @@ function* overrideTheManualAction({payload: {instanceId, pending: {outputKey}, p
         yield put({type: actions.FetchingPending, payload: {keys: [instanceId]}});
         yield call(api.overrideManualAction, {instanceId, outputKey, phase, stage, status, stepIndex}, shouldOverride);
         yield put({type: actions.FetchingSuccess, payload: {keys: [instanceId]}});
+        yield put({type: actions.ContinueBuild, payload: {instanceId}});
     }
-    catch(e) {
+    catch (e) {
         debugger;
         console.log(e);
         // we should handle errors in the UI

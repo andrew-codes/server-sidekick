@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Bar} from 'react-native-progress';
+import {bindActionCreators} from 'redux';
 import {builds} from 'v1-status-state-modules';
 import {connect} from 'react-redux';
 import {Text, View} from 'react-native';
@@ -75,5 +76,11 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(PipelineDetails);
+function dispatchToProps(dispatch) {
+    return {
+        fetchBuildDetails: bindActionCreators(builds.actions.creators.fetchBuildDetails, dispatch),
+    };
+}
+
+export default connect(mapStateToProps, dispatchToProps)(PipelineDetails);
 
