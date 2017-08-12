@@ -5,12 +5,20 @@ import Typography from 'material-ui/Typography';
 import {createStyleSheet, withStyles} from 'material-ui/styles';
 
 const styleSheet = createStyleSheet({
+    children: {
+      flex: 1,
+    },
     title: {
         paddingLeft: '10px',
     },
+    toolbar: {
+        display: 'flex',
+        paddingRight: 0,
+    }
 });
 
 const ApplicationBar = ({
+                            children,
                             classes,
                             failed,
                             title,
@@ -19,7 +27,9 @@ const ApplicationBar = ({
         color={failed ? 'accent' : 'primary'}
         position="fixed"
     >
-        <Toolbar>
+        <Toolbar
+            className={classes.toolbar}
+        >
             <img src="/static/hackweek-serversidekick-icon.png" />
             <Typography
                 className={classes.title}
@@ -28,6 +38,11 @@ const ApplicationBar = ({
             >
                 {title}
             </Typography>
+            {Boolean(children) && (
+                <div className={classes.children}>
+                    {children}
+                </div>
+            )}
         </Toolbar>
     </AppBar>
 );

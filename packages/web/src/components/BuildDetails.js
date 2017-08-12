@@ -1,4 +1,6 @@
 import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import Launch from 'material-ui-icons/Launch';
 import React, {Component} from 'react';
 import RefreshIcon from 'material-ui-icons/Refresh';
 import Typography from 'material-ui/Typography';
@@ -6,7 +8,6 @@ import {createStyleSheet, withStyles} from 'material-ui/styles';
 import {grey} from 'material-ui/colors';
 import {LinearProgress} from 'material-ui/Progress';
 import ApplicationBar from './ApplicationBar';
-import {fetchBuildDetails} from '../../../js-api/src/index';
 
 const stylesheet = createStyleSheet(theme => ({
     '@keyframes spin': {
@@ -23,6 +24,10 @@ const stylesheet = createStyleSheet(theme => ({
     content: {
         height: 'calc(100vh - 100px)',
         padding: '80px 20px 20px',
+    },
+    launchIconContainer: {
+        flex: 1,
+        textAlign: 'right',
     },
     refreshIcon: {
         alignSelf: 'center',
@@ -51,6 +56,15 @@ class BuildDetails extends Component {
         }
     }
 
+    launchCtm = () => {
+        const {
+            build: {
+                url,
+            },
+        } = this.props;
+        window.open(url);
+    };
+
     render() {
         const {
             build,
@@ -64,7 +78,13 @@ class BuildDetails extends Component {
                 <ApplicationBar
                     title={`${build.name}: ${build.pipelineName}`}
                     failed={build.severity === 3}
-                />
+                >
+                    <div className={classes.launchIconContainer}>
+                        <IconButton onClick={this.launchCtm}>
+                            <Launch />
+                        </IconButton>
+                    </div>
+                </ApplicationBar>
                 <div className={classes.content}>
                     <Typography
                         component="h2"
