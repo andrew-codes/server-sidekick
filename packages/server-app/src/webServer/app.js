@@ -17,6 +17,7 @@ export default (server) => {
         const extensionsToIgnore = [
             'jpg',
             'css',
+            'png',
             'js',
             'ico',
             'json',
