@@ -4,6 +4,7 @@ import RefreshIcon from 'material-ui-icons/Refresh';
 import Typography from 'material-ui/Typography';
 import {createStyleSheet, withStyles} from 'material-ui/styles';
 import {grey} from 'material-ui/colors';
+import {LinearProgress} from 'material-ui/Progress';
 import ApplicationBar from './ApplicationBar';
 
 const stylesheet = createStyleSheet(theme => ({
@@ -19,7 +20,6 @@ const stylesheet = createStyleSheet(theme => ({
         margin: theme.spacing.unit,
     },
     content: {
-        display: 'flex',
         height: 'calc(100vh - 100px)',
         padding: '80px 20px 20px',
     },
@@ -32,6 +32,11 @@ const stylesheet = createStyleSheet(theme => ({
         height: '120px',
         width: '120px',
     },
+    refreshIconContainer: {
+        display: 'flex',
+        alignContent: 'center',
+        marginTop: '60px',
+    }
 }));
 
 class BuildDetails extends Component {
@@ -60,13 +65,39 @@ class BuildDetails extends Component {
                     failed={build.severity === 3}
                 />
                 <div className={classes.content}>
-                    {pending && <RefreshIcon className={classes.refreshIcon} />}
+                    <Typography
+                        component="h2"
+                        type="headline"
+                    >
+                        Instance ID: <span>{build.instanceId}</span>
+                    </Typography>
+                    {pending && (<div className={classes.refreshIconContainer}>
+                            <RefreshIcon className={classes.refreshIcon} />
+                        </div>
+                    )}
                     {!pending && (
                         <div>
-                            <div>Instance ID: <span>{build.instanceId}</span></div>
-                            <div>Phase: <span>{build.phase}</span></div>
-                            <div>Stage: <span>{build.stage}</span></div>
-                            <div>Progress: <span>{(100 * build.stepIndex / build.totalSteps)}%</span></div>
+                            <LinearProgress
+                                color="primary"
+                                mode="determinate"
+                                value={(100 * (build.stepIndex + 1) / build.totalSteps)}
+                            />
+                            {build.phase && (
+                                <Typography
+                                    component="h3"
+                                    type="subheading"
+                                >
+                                    Phase: <span>{build.phase}</span>
+                                </Typography>
+                            )}
+                            {build.stage && (
+                                <Typography
+                                    component="h3"
+                                    type="subheading"
+                                >
+                                    Stage: <span>{build.stage}</span>
+                                </Typography>
+                            )}
                             {Boolean(build.severity === 6 && build.pending) && (
                                 <div>
                                     <Typography component="h3">
