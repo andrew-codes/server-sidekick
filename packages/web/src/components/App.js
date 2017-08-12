@@ -31,7 +31,7 @@ class App extends Component {
             markNotified,
             unNotifiedBuilds,
         } = this.props;
-        const faviconSrc = !hasUnacknowledgedFailures ? "/static/pass.ico" : "/static/fail.ico";
+        const faviconSrc = !hasUnacknowledgedFailures ? "/static/pass.png" : "/static/fail.png";
         return (
             <div>
                 <BrowserTabFavicon src={faviconSrc} />
