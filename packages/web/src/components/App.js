@@ -40,7 +40,7 @@ class App extends Component {
                     markNotified={markNotified}
                 />
                 <ApplicationBar
-                    title="Builds"
+                    title="Pipelines"
                     failed={hasUnacknowledgedFailures}
                 />
                 <div className={classes.body}>

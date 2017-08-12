@@ -42,7 +42,7 @@ const Home = ({
                 component="h3"
                 type="headline"
             >
-                Builds
+                Pipelines
             </Typography>
             <TextFilter
                 fullWidth={true}
