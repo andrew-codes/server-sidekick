@@ -71,6 +71,7 @@ export default handleActions({
             [instanceId]: {
                 ...state.entities[instanceId],
                 severity: 1,
+                totalSuccess: state.entities[instanceId].totalSuccess + 1,
                 pending: null,
             }
         }

@@ -6,6 +6,7 @@ import {createStyleSheet, withStyles} from 'material-ui/styles';
 import {grey} from 'material-ui/colors';
 import {LinearProgress} from 'material-ui/Progress';
 import ApplicationBar from './ApplicationBar';
+import {fetchBuildDetails} from '../../../js-api/src/index';
 
 const stylesheet = createStyleSheet(theme => ({
     '@keyframes spin': {
@@ -80,7 +81,7 @@ class BuildDetails extends Component {
                             <LinearProgress
                                 color="primary"
                                 mode="determinate"
-                                value={(100 * (build.stepIndex + 1) / build.totalSteps)}
+                                value={(100 * (build.totalSkipped + build.totalSuccess) / build.totalSteps)}
                             />
                             {build.phase && (
                                 <Typography
@@ -98,6 +99,24 @@ class BuildDetails extends Component {
                                     Stage: <span>{build.stage}</span>
                                 </Typography>
                             )}
+                            <Typography
+                                component="h3"
+                                type="subheading"
+                            >
+                                Total Skipped Steps: <span>{build.totalSkipped}</span>
+                            </Typography>
+                            <Typography
+                                component="h3"
+                                type="subheading"
+                            >
+                                Total Successful Steps: <span>{build.totalSuccess}</span>
+                            </Typography>
+                            <Typography
+                                component="h3"
+                                type="subheading"
+                            >
+                                Total Steps: <span>{build.totalSteps}</span>
+                            </Typography>
                             {Boolean(build.severity === 6 && build.pending) && (
                                 <div>
                                     <Typography component="h3">

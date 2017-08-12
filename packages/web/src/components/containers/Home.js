@@ -77,14 +77,11 @@ const Home = ({
     </div>
 );
 
-const stateToProps = (state) => {
-    console.log('selected build', builds.selectors.getSelected(state));
-    return ({
-        builds: builds.selectors.getFilteredBuilds(state),
-        selectedBuild: builds.selectors.getSelected(state),
-        isBuildDetailsRequestPending: builds.selectors.getIsBuildDetailsRequestPending(state),
-    });
-};
+const stateToProps = (state) => ({
+    builds: builds.selectors.getFilteredBuilds(state),
+    selectedBuild: builds.selectors.getSelected(state),
+    isBuildDetailsRequestPending: builds.selectors.getIsBuildDetailsRequestPending(state),
+});
 const dispatchToProps = (dispatch) => ({
     onFilterValueChange: bindActionCreators(builds.actions.creators.applyTextFilter, dispatch),
     onMuteBuilds: bindActionCreators(builds.actions.creators.muteBuilds, dispatch),
