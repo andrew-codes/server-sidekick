@@ -40,7 +40,7 @@ class App extends Component {
                     markNotified={markNotified}
                 />
                 <ApplicationBar
-                    title="Pipelines"
+                    title="Server SideKick"
                     failed={hasUnacknowledgedFailures}
                 />
                 <div className={classes.body}>

@@ -4,7 +4,7 @@ export default ({html, css}, initialState = {}) =>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>App</title>
+    <title>Server SideKick</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
     <link rel="shortcut icon" href="/static/pass.png" id="favicon" />
