@@ -4,9 +4,8 @@ export default StyleSheet.create({
   piList: {
     flex: 1,
     backgroundColor: '#fff',
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
   },
 });

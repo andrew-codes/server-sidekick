@@ -18,6 +18,7 @@ export default class PipelineInstanceStatus extends React.Component {
           <TouchableHighlight
             onPress={this.onPress}
             style={{flex: 1}}
+            underlayColor="rgba(0,0,0,0.15)"
           >
             <View style={styles.container}>
                 <View style={styles.top}>
