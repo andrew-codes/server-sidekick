@@ -36,7 +36,7 @@ export const getFilteredBuilds = createSelector(getLatestTwentyBuilds, getTextFi
         return builds;
     }
     const filter = textFilter.toLowerCase();
-    return builds.filter(build => build.name.toLowerCase().indexOf(filter) >= 0);
+    return builds.filter(build => (build.name.toLowerCase().indexOf(filter) >= 0) || build.pipelineName.toLowerCase().indexOf(filter) >= 0);
 });
 export const getFailedBuilds = createSelector(getFilteredBuilds, builds => builds.filter(build => build.severity === 3));
 export const hasUnacknowledgedFailures = createSelector(getFailedBuilds, getMutedBuildIds, (builds, mutedBuildIds) => builds.filter(build => !build.muted).length > 0);
