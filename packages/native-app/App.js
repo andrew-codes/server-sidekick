@@ -1,7 +1,8 @@
 import PushNotification from 'react-native-push-notification';
 import React, {Component} from 'react';
 import {AppRegistry, AlertIOS} from 'react-native';
-import {Provider} from 'react-redux';
+import {connect, Provider} from 'react-redux';
+import {builds} from 'v1-status-state-modules';
 import AppContainer from './appContainer'
 import createStore from './createStore';
 
@@ -53,19 +54,32 @@ PushNotification.configure({
 
 class App extends Component {
     render() {
+
         return (
-            <Provider store={store}>
             <NavigatorIOS
-              initialRoute={{
-                component: AppContainer,
-                title: 'Something Awesome',
-                barTintColor: '#edeeef',
-              }}
-              style={{flex: 1}}
+                initialRoute={{
+                    component: AppContainer,
+                    title: 'Something Awesome',
+                    barTintColor: this.props.hasUnacknowledgedFailures ? '#d52101' : '#edeeef',
+                }}
+                style={{flex: 1}}
             />
-            </Provider>
         );
     }
 }
 
-AppRegistry.registerComponent('ContinuumStatusMobile', () => App);
+function mapStateToProps(state) {
+    return {
+        hasUnacknowledgedFailures: builds.selectors.hasUnacknowledgedFailures(state),
+    };
+}
+
+const ConnectedApp = connect(mapStateToProps)(App);
+
+const Application = () => (
+    <Provider store={store}>
+        <ConnectedApp />
+    </Provider>
+);
+
+AppRegistry.registerComponent('ContinuumStatusMobile', () => Application);

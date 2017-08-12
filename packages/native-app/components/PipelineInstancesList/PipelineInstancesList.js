@@ -7,6 +7,7 @@ import styles from './styles';
 export default class PipelineInstancesList extends React.Component {
     render() {
         const {
+            onMute,
             onSelectBuild,
             pipelineInstances,
         } = this.props;
@@ -22,6 +23,7 @@ export default class PipelineInstancesList extends React.Component {
                             navigator={this.props.navigator}
                             piid={item.instanceId}
                             progress={item.progress}
+                            onMute={onMute}
                             onSelectBuild={onSelectBuild}
                             status={item.severity}
                         />

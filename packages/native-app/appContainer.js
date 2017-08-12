@@ -54,6 +54,7 @@ class AppContainer extends Component {
                 <PipelineInstancesList
                     navigator={this.props.navigator}
                     pipelineInstances={this.props.pis}
+                    onMute={this.props.onMute}
                     onSelectBuild={this.props.onSelectBuild}
                 />
             </View>
@@ -77,6 +78,7 @@ function dispatchToProps(dispatch) {
         onDeselectBuild: bindActionCreators(builds.actions.creators.deselectBuild, dispatch),
         markNotified: bindActionCreators(builds.actions.creators.markNotified, dispatch),
         overrideManualAction: bindActionCreators(builds.actions.creators.overrideManualAction, dispatch),
+        onMute: bindActionCreators(builds.actions.creators.muteBuilds, dispatch),
     };
 }
 

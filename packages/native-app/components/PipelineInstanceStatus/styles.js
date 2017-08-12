@@ -2,12 +2,8 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        marginBottom: 10,
-        marginTop: 10,
         flex: 1,
-        flexDirection: 'column',
-        paddingLeft: 20,
-        paddingRight: 20,
+        flexDirection: 'row',
     },
     text1: {
         height: 20,
@@ -19,11 +15,19 @@ export default StyleSheet.create({
     top: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
     },
     bottom: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+    },
+    icon: {
+        alignItems: 'center',
+        display: 'flex',
+        marginRight: 20,
+    },
+    pipelineItem: {
+        flex: 1,
     },
 });
