@@ -3,7 +3,9 @@ import {createSelector} from 'reselect';
 
 // -- Selectors
 export const getRoot = (state) => state.builds;
-export const getIsBuildDetailsRequestPending = createSelector(getRoot, root => (root.pendingRequests || []).indexOf(root.selected) >= 0);
+export const getPendingRequests = createSelector(getRoot, root => root.pendingRequests || []);
+export const getSelectedId = createSelector(getRoot, root => root.selected);
+export const getIsBuildDetailsRequestPending = createSelector(getPendingRequests, getSelectedId, (pendingRequests, selectedId) => pendingRequests.indexOf(selectedId) >= 0);
 export const getTextFilterValue = createSelector(getRoot, root => root.textFilter);
 export const getMutedBuildIds = createSelector(getRoot, root => root.muted || []);
 export const getBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedIds) => Object.keys(root.entities)
@@ -23,10 +25,10 @@ export const getBuilds = createSelector(getRoot, getMutedBuildIds, (root, mutedI
         return 0;
     })
 );
-export const getSelected = createSelector(getRoot, getBuilds, (root, builds) => root.selected
+export const getSelected = createSelector(getRoot, getSelectedId, (root, selectedId) => selectedId
     ? ({
-        ...root.entities[root.selected],
-        lastRetrieval: moment(root.entities[root.selected].lastRetrieval),
+        ...root.entities[selectedId],
+        lastRetrieval: moment(root.entities[selectedId].lastRetrieval),
     })
     : null
 );

@@ -64,14 +64,15 @@ export default handleActions({
         pendingRequests: (state.pendingRequests || [])
             .filter(requestKey => keys.indexOf(requestKey) < 0)
     }),
-    [actions.ContinueBuild]: (state, {payload: {instanceId}}) => ({
+    [actions.OverrideManualAction]: (state, {payload: {instanceId}}) => ({
         ...state,
         entities: {
             ...state.entities,
             [instanceId]: {
                 ...state.entities[instanceId],
+                severity: 1,
                 pending: null,
-            },
-        },
+            }
+        }
     })
 }, defaultState);

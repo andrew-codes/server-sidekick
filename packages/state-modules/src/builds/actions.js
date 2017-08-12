@@ -10,8 +10,7 @@ export const MuteBuilds = 'muteBuilds';
 export const MarkNotified = 'markNotified';
 export const SelectBuild = 'selectBuild';
 export const DeselectBuild = 'deselectBuild';
-export const OverrideManualAction = 'OverrideManualAction';
-export const ContinueBuild = 'ContinueBuild';
+export const OverrideManualAction = 'overrideManualAction';
 
 export const creators = createActions({
     [ApplyTextFilter]: value => ({value}),
@@ -21,7 +20,6 @@ export const creators = createActions({
             lastRetrieval: (new Date()).toString(),
         }))
     }),
-    [ContinueBuild]: id => ({id}),
     [MuteBuilds]: ids => ({ids}),
     [MarkNotified]: ids => ({ids}),
     [SelectBuild]: id => ({id}),

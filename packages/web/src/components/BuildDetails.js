@@ -1,5 +1,5 @@
 import Button from 'material-ui/Button';
-import React from 'react';
+import React, {Component} from 'react';
 import RefreshIcon from 'material-ui-icons/Refresh';
 import Typography from 'material-ui/Typography';
 import {createStyleSheet, withStyles} from 'material-ui/styles';
@@ -34,58 +34,78 @@ const stylesheet = createStyleSheet(theme => ({
     },
 }));
 
-const BuildDetails = ({
-                          build,
-                          classes,
-                          onManualActionOverride,
-                          pending,
-                      }) => (
-    <div>
-        <ApplicationBar
-            title={`${build.name}: ${build.pipelineName}`}
-            failed={build.severity === 3}
-        />
-        <div className={classes.content}>
-            {pending && <RefreshIcon className={classes.refreshIcon} />}
-            {!pending && (
-                <div>
-                    <div>Instance ID: <span>{build.instanceId}</span></div>
-                    <div>Phase: <span>{build.phase}</span></div>
-                    <div>Stage: <span>{build.stage}</span></div>
-                    <div>Progress: <span>{(100 * build.stepIndex / build.totalSteps)}%</span></div>
-                    {Boolean(build.pending) && (
+class BuildDetails extends Component {
+    componentWillUpdate(nextProps) {
+        const {
+            build,
+            fetchBuildDetails
+        } = nextProps;
+        if (build.severity === 6 && !build.pending) {
+            fetchBuildDetails(build.instanceId);
+        }
+    }
+
+    render() {
+        const {
+            build,
+            classes,
+            onManualActionOverride,
+            pending,
+        }
+            = this.props;
+        return (
+            <div>
+                <ApplicationBar
+                    title={`${build.name}: ${build.pipelineName}`}
+                    failed={build.severity === 3}
+                />
+                <div className={classes.content}>
+                    {pending && <RefreshIcon className={classes.refreshIcon} />}
+                    {!pending && (
                         <div>
-                            <Typography component="h3">
-                                Pending
-                            </Typography>
-                            <Typography component="h4">
-                                {build.pending.title}
-                            </Typography>
-                            <Typography component="p">
-                                {build.pending.question}
-                            </Typography>
-                            <Button
-                                className={classes.button}
-                                color="primary"
-                                onClick={() => onManualActionOverride(true)}
-                                raised
-                            >
-                                Yes
-                            </Button>
-                            <Button
-                                className={classes.button}
-                                color="accent"
-                                onClick={() => onManualActionOverride(false)}
-                                raised
-                            >
-                                No
-                            </Button>
+                            <div>Instance ID: <span>{build.instanceId}</span></div>
+                            <div>Phase: <span>{build.phase}</span></div>
+                            <div>Stage: <span>{build.stage}</span></div>
+                            <div>Progress: <span>{(100 * build.stepIndex / build.totalSteps)}%</span></div>
+                            {Boolean(build.severity === 6 && build.pending) && (
+                                <div>
+                                    <Typography component="h3">
+                                        Pending
+                                    </Typography>
+                                    <Typography component="h4">
+                                        {build.pending.title}
+                                    </Typography>
+                                    <Typography component="p">
+                                        {build.pending.question}
+                                    </Typography>
+                                    <Button
+                                        className={classes.button}
+                                        color="primary"
+                                        onClick={() => {
+                                            onManualActionOverride(true);
+                                        }}
+                                        raised
+                                    >
+                                        Yes
+                                    </Button>
+                                    <Button
+                                        className={classes.button}
+                                        color="accent"
+                                        onClick={() => {
+                                            onManualActionOverride(false);
+                                        }}
+                                        raised
+                                    >
+                                        No
+                                    </Button>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
-            )}
-        </div>
-    </div>
-);
+            </div>
+        );
+    }
+}
 
 export default withStyles(stylesheet)(BuildDetails);

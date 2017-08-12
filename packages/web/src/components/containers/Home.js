@@ -23,10 +23,12 @@ const styleSheet = createStyleSheet(theme => ({
 const Home = ({
                   builds,
                   classes,
+                  continueBuild,
+                  fetchBuildDetails,
                   isBuildDetailsRequestPending,
                   onDeselectBuild,
                   onFilterValueChange,
-                  onManualActionOverride,
+                  onOverrideManualAction,
                   onMuteBuilds,
                   onSelectBuild,
                   selectedBuild,
@@ -66,7 +68,8 @@ const Home = ({
             >
                 <BuildDetails
                     build={selectedBuild}
-                    onManualActionOverride={shouldOverride => onManualActionOverride(selectedBuild, shouldOverride)}
+                    fetchBuildDetails={fetchBuildDetails}
+                    onManualActionOverride={shouldOverride => onOverrideManualAction(selectedBuild, shouldOverride)}
                     pending={isBuildDetailsRequestPending}
                 />
             </Drawer>
@@ -88,7 +91,7 @@ const dispatchToProps = (dispatch) => ({
     selectBuild: bindActionCreators(builds.actions.creators.selectBuild, dispatch),
     fetchBuildDetails: bindActionCreators(builds.actions.creators.fetchBuildDetails, dispatch),
     onDeselectBuild: bindActionCreators(builds.actions.creators.deselectBuild, dispatch),
-    onManualActionOverride: bindActionCreators(builds.actions.creators.manualActionOverride, dispatch)
+    onOverrideManualAction: bindActionCreators(builds.actions.creators.overrideManualAction, dispatch),
 });
 const mergeProps = (stateProps, dispatchProps, props) => ({
     ...stateProps,

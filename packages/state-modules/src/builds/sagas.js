@@ -1,6 +1,7 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
+import {call, put, select, takeEvery} from 'redux-saga/effects';
 import * as api from 'v1-status-js-api';
 import * as actions from './actions';
+import {getPendingRequests} from './selectors';
 
 export default [
     () => takeEvery(actions.FetchBuildDetails, fetchBuildDetails),
@@ -10,6 +11,10 @@ export default [
 
 function* fetchBuildDetails({payload: {id}}) {
     try {
+        const pendingRequests = yield select(getPendingRequests);
+        if (pendingRequests.indexOf(id) >= 0) {
+            return;
+        }
         yield put({type: actions.FetchingPending, payload: {keys: [id]}});
         const build = yield call(api.fetchBuildDetails, id);
         yield put({
@@ -51,7 +56,6 @@ function* overrideTheManualAction({payload: {instanceId, pending: {outputKey}, p
         yield put({type: actions.FetchingPending, payload: {keys: [instanceId]}});
         yield call(api.overrideManualAction, {instanceId, outputKey, phase, stage, status, stepIndex}, shouldOverride);
         yield put({type: actions.FetchingSuccess, payload: {keys: [instanceId]}});
-        yield put({type: actions.ContinueBuild, payload: {instanceId}});
     }
     catch (e) {
         debugger;
