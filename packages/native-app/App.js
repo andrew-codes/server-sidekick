@@ -58,7 +58,7 @@ class App extends Component {
             <NavigatorIOS
               initialRoute={{
                 component: AppContainer,
-                title: 'Something Awesome',
+                title: 'Server SideKick',
                 barTintColor: '#edeeef',
               }}
               style={{flex: 1}}
