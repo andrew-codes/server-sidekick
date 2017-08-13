@@ -12,20 +12,23 @@ This is a sample application to aid in bootstrapping other projects, as well as 
 # Getting Started
 
 ```bash
-# after initial git clone in the repo folder
-cd packages/api
-git submodule update --init --recursive #updates API git submodule
-git checkout hackweek # and checks out the hackweek branch
-cd ../..
 npm install
 npm run bootstrap
 ```
 
 ## Running API Server
-Ensure you [setup your env](packages/api/README.md) first.
+Ensure you [setup your env](packages/api/README.md) first. Ensure the environment variable `ASPNETCORE_ENVIRONMENT=Development` is set.
 
-Ensure the environment variable `ASPNETCORE_ENVIRONMENT=Development` is set.
+### Checkout the latest API submodule
+```bash
+# after initial git clone in the repo folder
+cd packages/api
+git submodule update --init --recursive #updates API git submodule
+git checkout hackweek # and checks out the hack week branch
+cd ../.. # back to root directory
+```
 
+### Run API
 - `npm run api/run`
 
 ## Running Web App
@@ -34,11 +37,16 @@ Ensure the environment variable `ASPNETCORE_ENVIRONMENT=Development` is set.
 - `npm run web/start` (run with API server)
 
 ## Running Native App
-
+```bash
+npm run native/run
 ```
-cd packages/native-app
+ 
+Alternatively, you can run the these two commands in separate shell instances from the `./packages/native-app` 
+ directory.
+ 
+```
 npm run haul
-react-native run-ios # in a different console instance
+react-native run-ios
 ```
 
 ## Validating/Testing

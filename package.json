@@ -18,16 +18,13 @@
     "bootstrap": "build/bin/bootstrap.sh",
     "bootstrap/single": "build/bin/bootstrap.single.sh",
     "lint": "build/bin/lint.sh",
-    "native": "build/bin/start-native.sh ios",
-    "native/android": "build/bin/start-native.sh android",
-    "native/ios": "build/bin/start-native.sh ios",
-    "native/start": "concurrently 'npm run native/ios' 'npm run api/run'",
+    "native/build": "build/bin/build-native.sh ios",
+    "native/run": "concurrently 'build/bin/start-native.sh ios' 'npm run native/build'",
     "prepublish/single": "cross-env NODE_ENV=production ./build/bin/prepublish.single.sh",
     "test": "cross-env NODE_ENV=test build/bin/test.sh",
     "test/single": "cross-env NODE_ENV=test build/bin/test.single.sh",
     "validate": "concurrently 'npm test' 'npm run lint'",
-    "web/run": "build/bin/start-web.sh",
-    "web/start": "concurrently 'npm run api/run' 'npm run web/run'"
+    "web/run": "build/bin/start-web.sh"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
