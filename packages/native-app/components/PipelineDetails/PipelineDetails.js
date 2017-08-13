@@ -41,9 +41,7 @@ class PipelineDetails extends Component {
             return null;
         }
         const {
-            group,
-            pipelineName,
-            project,
+            name,
             severity,
             totalFailed,
             totalSkipped,
@@ -54,7 +52,7 @@ class PipelineDetails extends Component {
         return (
             <View style={styles.piDetails}>
                 <View style={styles.spacer} />
-                <Text style={styles.title}>{pipelineName} {group} {project}</Text>
+                <Text style={styles.title}>{name}</Text>
                 {!isBuildDetailsRequestPending && (
                     <Bar
                         color={progressColor}
