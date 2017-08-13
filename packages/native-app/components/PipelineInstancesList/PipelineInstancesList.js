@@ -17,7 +17,7 @@ export default class PipelineInstancesList extends React.Component {
                     keyExtractor={(item, index) => item.instanceId}
                     renderItem={({item}) => (
                         <PipelineInstanceStatus
-                            label={`${item.pipelineName} ${item.group} ${item.project}`}
+                            label={item.name}
                             lastRetrieval={moment(item.lastRetrieval).format('MM/DD/YY hh:mm:ss')}
                             navigator={this.props.navigator}
                             piid={item.instanceId}
