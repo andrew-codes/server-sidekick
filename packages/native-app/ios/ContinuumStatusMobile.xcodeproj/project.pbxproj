@@ -34,11 +34,10 @@
 		2DCD954D1E0B4F2C00145EB5 /* ContinuumStatusMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ContinuumStatusMobileTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		DB5A38B11F41BB69006ADDB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB5A38B01F41BB69006ADDB1 /* Images.xcassets */; };
+		DB5A38B51F41BCD9006ADDB1 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = DB5A38B21F41BCD9006ADDB1 /* assets */; };
+		DB5A38B61F41BCD9006ADDB1 /* index.ios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DB5A38B31F41BCD9006ADDB1 /* index.ios.bundle */; };
 		DBE492451F3CFC470071D235 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE492331F3CFC340071D235 /* libRCTPushNotification.a */; };
-		DBE492471F3CFCB90071D235 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE492461F3CFCB90071D235 /* Images.xcassets */; };
-		DBE492481F3CFCB90071D235 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE492461F3CFCB90071D235 /* Images.xcassets */; };
-		DBE492491F3CFCB90071D235 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE492461F3CFCB90071D235 /* Images.xcassets */; };
-		DBE4924A1F3CFCB90071D235 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE492461F3CFCB90071D235 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,8 +270,11 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		DB5A38B01F41BB69006ADDB1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ContinuumStatusMobile/Images.xcassets; sourceTree = "<group>"; };
+		DB5A38B21F41BCD9006ADDB1 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../dist/assets; sourceTree = "<group>"; };
+		DB5A38B31F41BCD9006ADDB1 /* index.ios.bundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.bundle; path = ../dist/index.ios.bundle; sourceTree = "<group>"; };
+		DB5A38B41F41BCD9006ADDB1 /* index.ios.bundle.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = index.ios.bundle.map; path = ../dist/index.ios.bundle.map; sourceTree = "<group>"; };
 		DBE492231F3CFC340071D235 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
-		DBE492461F3CFCB90071D235 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../../../../../.Trash/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,7 +410,10 @@
 		13B07FAE1A68108700A75B9A /* ContinuumStatusMobile */ = {
 			isa = PBXGroup;
 			children = (
-				DBE492461F3CFCB90071D235 /* Images.xcassets */,
+				DB5A38B21F41BCD9006ADDB1 /* assets */,
+				DB5A38B31F41BCD9006ADDB1 /* index.ios.bundle */,
+				DB5A38B41F41BCD9006ADDB1 /* index.ios.bundle.map */,
+				DB5A38B01F41BB69006ADDB1 /* Images.xcassets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -881,7 +886,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE492481F3CFCB90071D235 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,8 +893,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE492471F3CFCB90071D235 /* Images.xcassets in Resources */,
+				DB5A38B51F41BCD9006ADDB1 /* assets in Resources */,
+				DB5A38B61F41BCD9006ADDB1 /* index.ios.bundle in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				DB5A38B11F41BB69006ADDB1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,7 +904,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE492491F3CFCB90071D235 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,7 +911,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBE4924A1F3CFCB90071D235 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,7 +929,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1060,7 +1064,7 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = ContinuumStatusMobile/Info.plist;
@@ -1078,7 +1082,7 @@
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = ContinuumStatusMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
