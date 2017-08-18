@@ -1,5 +1,5 @@
 {
-    "preset": "jest-expo",
+    "preset": "jest-react-native",
     "coverageThreshold": {
         "global": {
             "branches": 50,

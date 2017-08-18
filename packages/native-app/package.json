@@ -35,12 +35,8 @@
     "v1-status-js-api": "^0.0.1",
     "v1-status-state-modules": "^0.0.1"
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "devDependencies": {
     "haul": "^1.0.0-beta.4",
-    "jest-expo": "~1.0.1",
     "react-test-renderer": "16.0.0-alpha.6"
   }
 }

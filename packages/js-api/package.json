@@ -12,8 +12,8 @@
   "webpack/entry": "src/index.js",
   "webpack/output": "dist/index.js",
   "scripts": {
-    "prepublish": "{ cd ../../; npm run prepublish/single v1-status-web-ui; };",
-    "test": "{ cd ../../; npm run test/single v1-status-web-ui; };"
+    "prepublish": "{ cd ../../; npm run prepublish/single v1-status-js-api; };",
+    "test": "{ cd ../../; npm run test/single v1-status-js-api; };"
   },
   "license": "MIT",
   "dependencies": {
