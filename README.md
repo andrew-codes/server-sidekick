@@ -1,6 +1,6 @@
 [![build status](https://travis-ci.org/andrew-codes/server-sidekick.svg?branch=master)](https://travis-ci.org/andrew-codes/server-sidekick)
 
-# Server SideKick
+# ![Server SideKick](./server-sidekick-logo.png) Server SideKick
 
 This is the August 2017 hack week project from VersionOne; only one week, only one rule: deliver and demo your project.
 
