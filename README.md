@@ -1,13 +1,20 @@
-[![build status](https://travis-ci.org/andrew-codes/hack-week-august-2017.svg?branch=master)](https://travis-ci.org/andrew-codes/hack-week-august-2017)
+[![build status](https://travis-ci.org/andrew-codes/server-sidekick.svg?branch=master)](https://travis-ci.org/andrew-codes/server-sidekick)
 
-This is a sample application to aid in bootstrapping other projects, as well as keeping current with technology trends and best practices.  This bootstrap reference app contains a SPA and a native iOS/Android application. This structure is particularly well suited for web apps that want to share code to a native app.
+# Server SideKick
+
+This is the August 2017 hack week project from VersionOne; only one week, only one rule: deliver and demo your project.
+
+This suite of apps are used to monitor, in real-time, pipeline/build statuses from Continuum in order to provide alerts to QA, DevOps, and Release Managers when a pipeline requires intervention.
+ 
+ ## Technical Achievements
+The native app, web app, and web server all share the same modules powering their features. The only difference between them are the actual UI components themselves. All state management, server interactions, etc. is all the same code for all three.
 
 # Prerequisites
 
 - [nodejs@^6.11.0](https://nodejs.org/en/download/)
 - npm@^5.0.0
-- [dotnet Core 2.0 Preview 2](https://www.microsoft.com/net/core/preview#windowscmd)
-- Bash (use Linux shell on Windows version@16.04)
+- [dotnet Core 2.0 Preview 2](https://www.microsoft.com/net/core/preview)
+- Bash (not minqw; use Linux shell on Windows version@16.04)
 
 # Getting Started
 
@@ -29,25 +36,13 @@ cd ../.. # back to root directory
 ```
 
 ### Run API
-- `npm run api/run`
+`npm run api/run`
 
 ## Running Web App
-
-- `npm run web/run` (run UI web server only)
-- `npm run web/start` (run with API server)
+`npm run web/run` (run UI web server only)
 
 ## Running Native App
-```bash
-npm run native/run
-```
- 
-Alternatively, you can run the these two commands in separate shell instances from the `./packages/native-app` 
- directory.
- 
-```
-npm run haul
-react-native run-ios
-```
+`npm run native/run`
 
 ## Validating/Testing
 
